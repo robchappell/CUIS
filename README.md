@@ -8,7 +8,7 @@
 <h3 align="center">Core UI System</h3>
 
 <p align="center">
-  An open source zero-dependency design system with chart and diagramming suite.
+  An open source, zero-dependency design system with chart and diagramming suite.
   <br>
   <a href="index.html"><strong>Explore the docs »</strong></a>
   <br>
@@ -18,14 +18,30 @@
   <a href="CONTRIBUTING.md">Contributing</a>
   ·
   <a href="SECURITY.md">Security</a>
+  <br>
+  <br>
+  <br>
 </p>
+
+<br>
+<hr>
+<br>
 
 <p align="center">
   <img alt="CUIS docs hero in the Mono theme." src="preview-hero.png" width="720">
 </p>
+
+<br>
+<hr>
+<br>
+
 <p align="center">
   <img alt="CUIS diagram suite, with a taxonomy tree and a governance tree." src="preview-diagrams.png" width="720">
 </p>
+
+<br>
+<hr>
+<br>
 
 ## Quickstart
 
