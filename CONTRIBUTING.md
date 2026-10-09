@@ -75,6 +75,8 @@ Then open a Pull Request on GitHub.
 
 ---
 
-## Code of Conduct
+## Code of conduct
 
-This project follows the [code of conduct](CODE_OF_CONDUCT.md). By participating, you agree to uphold a welcoming, respectful environment.
+Be respectful. Harassment, personal attacks, and exclusionary behavior are not accepted.
+
+The maintainer may remove comments, commits, or contributors who break this standard. Report a problem to Rob Chappell at [robchappell.contact@gmail.com](mailto:robchappell.contact@gmail.com).

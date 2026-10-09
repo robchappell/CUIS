@@ -1,16 +1,17 @@
 <p align="center">
+  <br>
+  <br>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="mark-on-dark.svg">
     <img alt="Core UI System mark" src="mark-on-light.svg" width="120" height="120">
   </picture>
 </p>
-
 <h3 align="center">Core UI System</h3>
 
 <p align="center">
   An open source, zero-dependency design system with chart and diagramming suite.
   <br>
-  <a href="index.html"><strong>Explore the docs »</strong></a>
+  <a href="https://robchappell.github.io/CUIS"><strong>Explore the docs »</strong></a>
   <br>
   <br>
   <a href="#quickstart">Quickstart</a>
@@ -18,8 +19,6 @@
   <a href="CONTRIBUTING.md">Contributing</a>
   ·
   <a href="SECURITY.md">Security</a>
-  <br>
-  <br>
   <br>
 </p>
 
@@ -36,7 +35,7 @@
 <br>
 
 <p align="center">
-  <img alt="CUIS diagram suite, with a taxonomy tree and a governance tree." src="preview-diagrams.png" width="720">
+  <img alt="CUIS diagram suite, with a taxonomy tree diagram example." src="preview-diagrams.png" width="720">
 </p>
 
 <br>
