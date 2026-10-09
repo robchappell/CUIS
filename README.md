@@ -8,7 +8,7 @@
 <h3 align="center">Core UI System</h3>
 
 <p align="center">
-  A design system for static pages. Drop in a theme, a stylesheet, and a small script.
+  An open source zero-dependency design system with chart and diagramming suite.
   <br>
   <a href="index.html"><strong>Explore the docs »</strong></a>
   <br>
@@ -21,7 +21,10 @@
 </p>
 
 <p align="center">
-  <img alt="Docs specimen in the Red theme, with the mark pile and a line chart." src="preview.png" width="840">
+  <img alt="CUIS docs hero in the Mono theme." src="preview-hero.png" width="720">
+</p>
+<p align="center">
+  <img alt="CUIS diagram suite, with a taxonomy tree and a governance tree." src="preview-diagrams.png" width="720">
 </p>
 
 ## Quickstart

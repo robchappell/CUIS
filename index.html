@@ -191,10 +191,38 @@
       position: sticky;
       top: 0;
       overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: transparent transparent;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       gap: calc(var(--cuis-stack) * 1.25);
+    }
+
+    .cuis-sidebar:hover,
+    .cuis-sidebar:focus-within {
+      scrollbar-color: color-mix(in srgb, var(--cuis-text-secondary) 45%, transparent) transparent;
+    }
+
+    .cuis-sidebar::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .cuis-sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .cuis-sidebar::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+
+    .cuis-sidebar:hover::-webkit-scrollbar-thumb,
+    .cuis-sidebar:focus-within::-webkit-scrollbar-thumb {
+      background: color-mix(in srgb, var(--cuis-text-secondary) 45%, transparent);
+      background-clip: padding-box;
     }
 
     .cuis-nav-group {
