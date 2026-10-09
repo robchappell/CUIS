@@ -1,0 +1,319 @@
+:root,
+[data-theme="light"],
+.theme-light,
+.cdviz-root[data-theme="light"] {
+  --cdviz-series-1: #0969da;
+  --cdviz-series-2: #1a7f37;
+  --cdviz-series-3: #d97706;
+  --cdviz-series-4: #8250df;
+  --cdviz-series-5: #cf222e;
+
+  --cdviz-text: #1f2328;
+  --cdviz-text-muted: #656d76;
+  --cdviz-border: #d0d7de;
+  --cdviz-grid: #e1e4e8;
+  --cdviz-bg: #ffffff;
+  --cdviz-surface: #f6f8fa;
+  --cdviz-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --cdviz-focus-ring: #0969da;
+}
+
+[data-theme="dark"],
+.theme-dark,
+.cdviz-root[data-theme="dark"] {
+  --cdviz-series-1: #58a6ff;
+  --cdviz-series-2: #3fb950;
+  --cdviz-series-3: #d29922;
+  --cdviz-series-4: #bc8cff;
+  --cdviz-series-5: #f85149;
+
+  --cdviz-text: #e6edf3;
+  --cdviz-text-muted: #8b949e;
+  --cdviz-border: #484f58;
+  --cdviz-grid: #30363d;
+  --cdviz-bg: #161b22;
+  --cdviz-surface: #21262d;
+  --cdviz-focus-ring: #58a6ff;
+}
+
+.cdviz-root {
+  display: block;
+  font-family: var(--cdviz-font);
+  color: var(--cdviz-text);
+  background: var(--cdviz-bg);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 1rem;
+}
+
+.cdviz-root *,
+.cdviz-root *::before,
+.cdviz-root *::after {
+  box-sizing: inherit;
+}
+
+.cdviz-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: var(--cdviz-text);
+}
+
+.cdviz-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.cdviz-root [data-series="1"] { fill: var(--cdviz-series-1); stroke: var(--cdviz-series-1); }
+.cdviz-root [data-series="2"] { fill: var(--cdviz-series-2); stroke: var(--cdviz-series-2); }
+.cdviz-root [data-series="3"] { fill: var(--cdviz-series-3); stroke: var(--cdviz-series-3); }
+.cdviz-root [data-series="4"] { fill: var(--cdviz-series-4); stroke: var(--cdviz-series-4); }
+.cdviz-root [data-series="5"] { fill: var(--cdviz-series-5); stroke: var(--cdviz-series-5); }
+
+.cdviz-root path.cdviz-slice {
+  stroke: var(--cdviz-bg);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.cdviz-root path.cdviz-line {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cdviz-root circle.cdviz-point {
+  stroke-width: 2;
+  stroke: var(--cdviz-bg);
+}
+
+.cdviz-root path.cdviz-area {
+  fill-opacity: 0.7;
+  stroke: var(--cdviz-bg);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.cdviz-root.cdviz-area path.cdviz-area,
+.cdviz-root.cdviz-sparkline path.cdviz-area {
+  fill-opacity: 0.25;
+  stroke: none;
+}
+
+.cdviz-root path.cdviz-area-line {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cdviz-root circle.cdviz-scatter-point {
+  stroke: var(--cdviz-bg);
+  stroke-width: 1.5;
+  fill-opacity: 0.85;
+}
+
+.cdviz-root .cdviz-meter-segment {
+  stroke: var(--cdviz-bg);
+  stroke-width: 1;
+}
+
+.cdviz-root circle.cdviz-legend-dot {
+  stroke: none;
+}
+
+.cdviz-root text.cdviz-legend-text {
+  fill: var(--cdviz-text-muted);
+  font-size: 11px;
+  font-family: var(--cdviz-font);
+  dominant-baseline: central;
+}
+
+.cdviz-root.cdviz-sparkline {
+  padding: 0.5rem;
+}
+
+.cdviz-root .cdviz-grid-line {
+  stroke: var(--cdviz-grid);
+  stroke-dasharray: 2 2;
+  stroke-width: 1;
+}
+
+.cdviz-root .cdviz-axis-line {
+  stroke: var(--cdviz-border);
+  stroke-width: 1;
+}
+
+.cdviz-root text.cdviz-label {
+  fill: var(--cdviz-text);
+  font-size: 12px;
+  font-family: var(--cdviz-font);
+  dominant-baseline: central;
+}
+
+.cdviz-root text.cdviz-value {
+  fill: var(--cdviz-text-muted);
+  font-size: 11px;
+  font-family: var(--cdviz-font);
+  font-variant-numeric: tabular-nums;
+  dominant-baseline: central;
+}
+
+.cdviz-root text.cdviz-axis-title {
+  fill: var(--cdviz-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--cdviz-font);
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.cdviz-root text.cdviz-donut-center-total {
+  fill: var(--cdviz-text);
+  font-size: 24px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.cdviz-root text.cdviz-donut-center-label {
+  fill: var(--cdviz-text-muted);
+  font-size: 11px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.cdviz-root text.cdviz-gauge-value {
+  fill: var(--cdviz-text);
+  font-size: 28px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.cdviz-root text.cdviz-gauge-label {
+  fill: var(--cdviz-text-muted);
+  font-size: 11px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.cdviz-root .cdviz-meter-track {
+  fill: var(--cdviz-surface);
+  stroke: var(--cdviz-border);
+  stroke-width: 1;
+}
+
+.cdviz-root .cdviz-gauge-track {
+  fill: none;
+  stroke: var(--cdviz-surface);
+  stroke-linecap: round;
+}
+
+.cdviz-root .cdviz-gauge-bar {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.cdviz-root .cdviz-bullet-track {
+  fill: var(--cdviz-surface);
+}
+
+.cdviz-root .cdviz-bullet-target {
+  stroke: var(--cdviz-text);
+  stroke-width: 3;
+}
+
+.cdviz-root [data-series]:hover,
+.cdviz-root [data-series]:focus,
+.cdviz-root [data-series]:focus-visible {
+  filter: brightness(1.2);
+  outline: none;
+  cursor: pointer;
+}
+
+.cdviz-root .cdviz-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--cdviz-text-muted);
+}
+
+.cdviz-root .cdviz-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cdviz-root .cdviz-legend-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.cdviz-root.cdviz-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: 1.5rem;
+  border: 1px dashed var(--cdviz-border);
+  border-radius: 6px;
+  background: var(--cdviz-surface);
+  text-align: center;
+}
+
+.cdviz-empty-message {
+  font-size: 0.875rem;
+  color: var(--cdviz-text-muted);
+  margin: 0;
+}
+
+.cdviz-table-wrapper {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.cdviz-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  color: var(--cdviz-text);
+  border-top: 1px solid var(--cdviz-border);
+}
+
+.cdviz-table caption {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cdviz-text-muted);
+  text-align: left;
+  padding-bottom: 0.25rem;
+}
+
+.cdviz-table th,
+.cdviz-table td {
+  padding: 0.375rem 0.5rem;
+  border-bottom: 1px solid var(--cdviz-border);
+  text-align: left;
+}
+
+.cdviz-table th.cdviz-num,
+.cdviz-table td.cdviz-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cdviz-root,
+  .cdviz-root * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

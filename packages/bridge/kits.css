@@ -1,0 +1,33 @@
+/* CUIS host bridge for cdviz and cdiag.
+   Link this after the CUIS theme stylesheets. Kits keep their own prefixes
+   and do not read --cuis-*. The host also sets data-theme from data-cuis-appearance. */
+
+html[data-cuis-appearance="light"],
+html[data-cuis-appearance="dark"] {
+  --cdviz-series-1: var(--cuis-series-1);
+  --cdviz-series-2: var(--cuis-series-2);
+  --cdviz-series-3: var(--cuis-series-3);
+  --cdviz-series-4: var(--cuis-series-4);
+  --cdviz-series-5: var(--cuis-series-5);
+  --cdviz-bg: var(--cuis-surface-raised);
+  --cdviz-surface: var(--cuis-surface-canvas);
+  --cdviz-text: var(--cuis-text-primary);
+  --cdviz-text-muted: var(--cuis-text-secondary);
+  --cdviz-border: var(--cuis-border-subtle);
+  --cdviz-grid: var(--cuis-border-subtle);
+
+  --cdiag-series-1: var(--cuis-series-1);
+  --cdiag-series-2: var(--cuis-series-2);
+  --cdiag-series-3: var(--cuis-series-3);
+  --cdiag-series-4: var(--cuis-series-4);
+  --cdiag-series-5: var(--cuis-series-5);
+  --cdiag-bg: var(--cuis-surface-raised);
+  --cdiag-surface: var(--cuis-surface-canvas);
+  --cdiag-surface-hover: var(--cuis-surface-hover);
+  --cdiag-border: var(--cuis-border-subtle);
+  --cdiag-border-subtle: var(--cuis-border-subtle);
+  --cdiag-text: var(--cuis-text-primary);
+  --cdiag-text-muted: var(--cuis-text-secondary);
+  --cdiag-line: var(--cuis-text-secondary);
+  --cdiag-line-active: var(--cuis-action-primary-background);
+}

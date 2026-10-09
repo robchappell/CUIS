@@ -1,0 +1,11 @@
+# Notice
+
+The MIT license in `LICENSE` covers the CSS, JavaScript, bridge, documentation, and specimen in this repository. That includes `packages/core`, `packages/viz`, `packages/diag`, and `packages/bridge`.
+
+Font files are not in this repository. Themes request them from Google Fonts. Those fonts stay under their own licenses:
+
+- Source Sans 3. Adobe. SIL Open Font License 1.1.
+- Red Hat Display and Red Hat Text. Red Hat. SIL Open Font License 1.1. The reserved names stay on the `font-family` values.
+- Geist and Geist Mono. Vercel. SIL Open Font License 1.1.
+
+The `redhat` theme is inspired by Red Hat and uses the open-source Red Hat fonts. It is not a Red Hat product and it is not the Red Hat Design System. This repository does not include the Red Hat logo.

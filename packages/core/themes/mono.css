@@ -1,0 +1,84 @@
+/* Core UI System theme: mono.
+   Minimalistic black-and-white architectural theme.
+   Geist & Geist Mono typography, high contrast, pure monochrome palette.
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap");
+
+html[data-cuis-theme="mono"] {
+  --cuis-font-display: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --cuis-font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --cuis-font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --cuis-page-title-weight: 600;
+  --cuis-display-tracking: -0.04em;
+
+  /* Warm gallery bone / alabaster surface */
+  --cuis-text-primary: #111111;
+  --cuis-text-secondary: #555555;
+  --cuis-surface-canvas: #f5f5f0;
+  --cuis-surface-raised: #ffffff;
+  --cuis-surface-hover: #ecece6;
+  --cuis-action-primary-background: #111111;
+  --cuis-action-primary-text: #f5f5f0;
+  --cuis-border-subtle: rgba(17, 17, 17, 0.12);
+  --cuis-border-hairline: rgba(17, 17, 17, 0.08);
+  --cuis-focus-ring: #111111;
+
+  /* Monochromatic series */
+  --cuis-series-1: #111111;
+  --cuis-series-2: #3f3f46;
+  --cuis-series-3: #71717a;
+  --cuis-series-4: #a1a1aa;
+  --cuis-series-5: #d4d4d8;
+
+  /* Refined, quiet status roles */
+  --cuis-status-info-text: #111111;
+  --cuis-status-ok-text: #166534;
+  --cuis-status-warn-text: #854d0e;
+  --cuis-status-critical-text: #991b1b;
+  --cuis-status-neutral-text: #111111;
+  --cuis-status-info-surface: #e4e4e7;
+  --cuis-status-ok-surface: #dcfce7;
+  --cuis-status-warn-surface: #fef9c3;
+  --cuis-status-critical-surface: #fee2e2;
+  --cuis-status-neutral-surface: #e4e4e7;
+
+  --cuis-elevation-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(17, 17, 17, 0.06);
+  --cuis-elevation-hover: 0 4px 16px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(17, 17, 17, 0.1);
+}
+
+html[data-cuis-theme="mono"][data-cuis-appearance="dark"] {
+  /* Deep obsidian canvas / graphite surfaces */
+  --cuis-text-primary: #f5f5f0;
+  --cuis-text-secondary: #999999;
+  --cuis-surface-canvas: #111111;
+  --cuis-surface-raised: #18181b;
+  --cuis-surface-hover: #222225;
+  --cuis-action-primary-background: #f5f5f0;
+  --cuis-action-primary-text: #111111;
+  --cuis-border-subtle: rgba(255, 255, 255, 0.12);
+  --cuis-border-hairline: rgba(255, 255, 255, 0.07);
+  --cuis-focus-ring: #f5f5f0;
+
+  /* Monochromatic series (dark) */
+  --cuis-series-1: #f5f5f0;
+  --cuis-series-2: #d4d4d8;
+  --cuis-series-3: #a1a1aa;
+  --cuis-series-4: #71717a;
+  --cuis-series-5: #3f3f46;
+
+  /* Status roles (dark) */
+  --cuis-status-info-text: #f5f5f0;
+  --cuis-status-ok-text: #86efac;
+  --cuis-status-warn-text: #fde047;
+  --cuis-status-critical-text: #fca5a5;
+  --cuis-status-neutral-text: #f5f5f0;
+  --cuis-status-info-surface: #27272a;
+  --cuis-status-ok-surface: #14532d;
+  --cuis-status-warn-surface: #713f12;
+  --cuis-status-critical-surface: #7f1d1d;
+  --cuis-status-neutral-surface: #27272a;
+
+  --cuis-elevation-card: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --cuis-elevation-hover: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.14);
+}

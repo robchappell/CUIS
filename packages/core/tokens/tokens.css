@@ -1,0 +1,98 @@
+/* Core UI System semantic tokens and roles.
+   Hex values and font families live in themes/. Components read these names only. */
+
+:where(:root) {
+  --cuis-font-display: sans-serif;
+  --cuis-font-body: sans-serif;
+
+  --cuis-text-primary: canvastext;
+  --cuis-text-secondary: canvastext;
+  --cuis-surface-canvas: canvas;
+  --cuis-surface-raised: canvas;
+  --cuis-surface-hover: canvas;
+  --cuis-action-primary-background: canvastext;
+  --cuis-action-primary-text: canvas;
+  --cuis-border-subtle: canvastext;
+  --cuis-border-hairline: canvastext;
+  --cuis-focus-ring: canvastext;
+
+  --cuis-series-1: canvastext;
+  --cuis-series-2: canvastext;
+  --cuis-series-3: canvastext;
+  --cuis-series-4: canvastext;
+  --cuis-series-5: canvastext;
+
+  --cuis-status-info-text: canvastext;
+  --cuis-status-ok-text: canvastext;
+  --cuis-status-warn-text: canvastext;
+  --cuis-status-critical-text: canvastext;
+  --cuis-status-neutral-text: canvastext;
+  --cuis-status-info-surface: canvas;
+  --cuis-status-ok-surface: canvas;
+  --cuis-status-warn-surface: canvas;
+  --cuis-status-critical-surface: canvas;
+  --cuis-status-neutral-surface: canvas;
+
+  --cuis-page-title-size: 1.5rem;
+  --cuis-page-title-weight: 600;
+  --cuis-page-title-leading: 1.25;
+  --cuis-display-tracking: 0;
+
+  --cuis-section-title-size: 1.125rem;
+  --cuis-section-title-weight: 600;
+  --cuis-section-title-leading: 1.35;
+
+  --cuis-card-title-size: 1rem;
+  --cuis-card-title-weight: 600;
+  --cuis-card-title-leading: 1.35;
+
+  --cuis-metric-size: 1.75rem;
+  --cuis-metric-weight: 600;
+  --cuis-metric-leading: 1.15;
+
+  --cuis-body-size: 0.9375rem;
+  --cuis-body-weight: 400;
+  --cuis-body-leading: 1.5;
+
+  --cuis-label-size: 0.8125rem;
+  --cuis-label-weight: 500;
+  --cuis-label-leading: 1.35;
+
+  --cuis-stack: 2rem;
+  --cuis-stack-tight: 0.75rem;
+  --cuis-inset: 1.25rem;
+  --cuis-header: 3.5rem;
+  --cuis-chip-block: 0.15rem;
+  --cuis-chip-inline: 0.55rem;
+
+  --cuis-elevation-edge: 0 1px 4px rgb(0 0 0 / 16%);
+  --cuis-elevation-card: 0 4px 22px -2px rgb(0 0 0 / 8%), 0 2px 8px -1px rgb(0 0 0 / 4%);
+  --cuis-elevation-hover: 0 14px 36px -4px rgb(0 0 0 / 14%), 0 5px 14px -2px rgb(0 0 0 / 6%);
+}
+
+[data-cuis-density="standard"] {
+  --cuis-stack: 2rem;
+  --cuis-stack-tight: 0.75rem;
+  --cuis-inset: 1.25rem;
+  --cuis-header: 3.5rem;
+  --cuis-chip-block: 0.15rem;
+  --cuis-chip-inline: 0.55rem;
+}
+
+[data-cuis-density="compact"] {
+  --cuis-stack: 1.5rem;
+  --cuis-stack-tight: 0.5rem;
+  --cuis-inset: 1rem;
+  --cuis-header: 3rem;
+  --cuis-chip-block: 0.1rem;
+  --cuis-chip-inline: 0.4rem;
+}
+
+[data-cuis-density="comfortable"] {
+  --cuis-stack: 2.5rem;
+  --cuis-stack-tight: 1rem;
+  --cuis-inset: 1.5rem;
+  --cuis-header: 4rem;
+  --cuis-chip-block: 0.5rem;
+  --cuis-chip-inline: 1.15rem;
+}

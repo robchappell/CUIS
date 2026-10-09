@@ -1,0 +1,3039 @@
+<!DOCTYPE html>
+<html lang="en" data-cuis-theme="core" data-cuis-appearance="light" data-cuis-density="standard">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Core UI System (CUIS) — Design System &amp; Visualization Suite</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="packages/core/themes/core.css">
+  <link rel="stylesheet" href="packages/core/themes/redhat.css">
+  <link rel="stylesheet" href="packages/core/themes/mono.css">
+  <link rel="stylesheet" href="packages/core/cuis.css">
+  <link rel="stylesheet" href="packages/viz/cdviz.css">
+  <link rel="stylesheet" href="packages/diag/cdiag.css">
+  <link rel="stylesheet" href="packages/bridge/kits.css">
+  <script src="packages/core/cuis.js" defer></script>
+  <script src="packages/viz/cdviz.js" defer></script>
+  <script src="packages/diag/cdiag.js" defer></script>
+  <style>
+    /* -------------------------------------------------------------------------
+       CUIS Docs Master Stylesheet
+       ------------------------------------------------------------------------- */
+    html, body {
+      max-width: 100vw;
+      overflow-x: clip;
+    }
+
+    .cuis-docs {
+      display: flex;
+      min-height: 100vh;
+      max-width: 100vw;
+      overflow-x: clip;
+      background: var(--cuis-surface-canvas);
+      color: var(--cuis-text-primary);
+      font-family: var(--cuis-font-body);
+    }
+
+    .cuis-docs-body {
+      flex: 1;
+      min-width: 0;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cuis-docs .cuis-main {
+      max-width: 1120px;
+      margin: 0 auto;
+      width: 100%;
+      min-width: 0;
+      padding: calc(var(--cuis-stack) * 1.5) calc(var(--cuis-inset) * 1.25) calc(var(--cuis-stack) * 4);
+      gap: calc(var(--cuis-stack) * 2.25);
+      box-sizing: border-box;
+    }
+
+    /* Sticky Frosted Header */
+    .cuis-docs .cuis-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+      box-sizing: border-box;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--cuis-surface-canvas) 85%, transparent);
+      border-bottom: 1px solid var(--cuis-border-subtle);
+      height: 56px;
+      padding: 0 calc(var(--cuis-inset) * 1.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .cuis-header-left {
+      display: none;
+    }
+
+    .cuis-mobile-close,
+    .cuis-sidebar-scrim,
+    .cuis-sidebar-mobile-controls {
+      display: none;
+    }
+
+    section[id],
+    footer[id] {
+      scroll-margin-top: 72px;
+    }
+
+    .cuis-logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      padding: 0;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    .cuis-logo-badge span {
+      font-family: var(--cuis-font-display);
+      font-weight: 600;
+      font-size: var(--cuis-section-title-size);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      color: var(--cuis-text-primary);
+    }
+
+    .cuis-brand-short {
+      display: none;
+    }
+
+    .cuis-brand-full {
+      display: inline;
+    }
+
+    .cuis-logo-badge:hover {
+      background: transparent !important;
+    }
+
+    .cuis-brand-mark {
+      color: var(--cuis-action-primary-background);
+      flex-shrink: 0;
+      display: inline-block;
+      vertical-align: middle;
+      transition: color 0.15s ease, filter 0.15s ease;
+    }
+
+    .cuis-logo-badge .cuis-brand-mark {
+      position: relative;
+      top: -2px;
+    }
+
+    .cuis-logo-badge:hover .cuis-brand-mark {
+      filter: brightness(1.12);
+    }
+
+    .cuis-header-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-left: auto;
+    }
+
+    /* Badges & Pills */
+    .cuis-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: var(--cuis-label-size);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.03em;
+      background: var(--cuis-surface-raised);
+      border: 1px solid var(--cuis-border-subtle);
+      color: var(--cuis-text-secondary);
+    }
+
+    .cuis-badge-primary {
+      background: color-mix(in srgb, var(--cuis-action-primary-background) 12%, transparent);
+      border-color: color-mix(in srgb, var(--cuis-action-primary-background) 30%, transparent);
+      color: var(--cuis-action-primary-background);
+    }
+
+    .cuis-badge-series-1 {
+      background: color-mix(in srgb, var(--cuis-series-1) 12%, transparent);
+      border-color: color-mix(in srgb, var(--cuis-series-1) 30%, transparent);
+      color: var(--cuis-series-1);
+    }
+
+    .cuis-badge-series-2 {
+      background: color-mix(in srgb, var(--cuis-series-2) 12%, transparent);
+      border-color: color-mix(in srgb, var(--cuis-series-2) 30%, transparent);
+      color: var(--cuis-series-2);
+    }
+
+    .cuis-badge-series-4 {
+      background: color-mix(in srgb, var(--cuis-series-4) 12%, transparent);
+      border-color: color-mix(in srgb, var(--cuis-series-4) 30%, transparent);
+      color: var(--cuis-series-4);
+    }
+
+    /* Sidebar Navigation - Open, airy, minimal */
+    .cuis-sidebar {
+      width: 260px;
+      min-width: 260px;
+      border-right: 1px solid var(--cuis-border-subtle);
+      background: var(--cuis-surface-canvas);
+      padding: calc(var(--cuis-inset) * 1.25);
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--cuis-stack) * 1.25);
+    }
+
+    .cuis-nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .cuis-nav-group + .cuis-nav-group {
+      margin-top: 0.65rem;
+      padding-top: 0.65rem;
+      border-top: 1px solid var(--cuis-border-subtle);
+    }
+
+    .cuis-nav-heading {
+      font-size: var(--cuis-label-size);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cuis-text-secondary);
+      opacity: 0.65;
+      padding: 0.25rem 0.6rem 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cuis-sidebar nav a {
+      display: flex;
+      align-items: center;
+      padding: 0.4rem 0.65rem;
+      border-radius: 4px;
+      color: var(--cuis-text-secondary);
+      text-decoration: none;
+      font-size: var(--cuis-label-size);
+      font-weight: 500;
+      line-height: 1.4;
+      transition: background-color 0.12s ease, color 0.12s ease;
+    }
+
+    .cuis-sidebar nav a:hover {
+      background: var(--cuis-surface-raised);
+      color: var(--cuis-text-primary);
+    }
+
+    .cuis-sidebar nav a[aria-current="page"] {
+      background: color-mix(in srgb, var(--cuis-text-primary) 6%, transparent);
+      color: var(--cuis-text-primary);
+      font-weight: 600;
+      box-shadow: inset 2px 0 0 var(--cuis-action-primary-background);
+    }
+
+    /* Hero Banner - Open, airy, typographic */
+    .cuis-hero {
+      padding: 0 0 calc(var(--cuis-stack) * 1.5);
+      border-bottom: 1px solid var(--cuis-border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .cuis-hero-graphic {
+      position: relative;
+      width: min(100%, 30rem);
+      aspect-ratio: 2.98 / 2.367;
+      margin-bottom: 0.25rem;
+    }
+
+    .cuis-hero-mark {
+      position: absolute;
+      width: 33.56%;
+      height: auto;
+      color: var(--cuis-text-primary);
+      opacity: 0.15;
+      display: block;
+      overflow: visible;
+      transition: opacity 0.25s ease;
+    }
+
+    .cuis-hero-mark:nth-child(1) { top: 0; left: 40.07%; z-index: 1; }
+    .cuis-hero-mark:nth-child(2) { top: 28.87%; left: 0; z-index: 2; }
+    .cuis-hero-mark:nth-child(3) { top: 28.87%; left: 26.63%; z-index: 3; }
+    .cuis-hero-mark:nth-child(4) { top: 28.87%; left: 53.26%; z-index: 4; }
+    .cuis-hero-mark:nth-child(5) { top: 57.75%; left: 66.44%; z-index: 5; }
+
+    .cuis-hero-mark:hover {
+      opacity: 0.25;
+      z-index: 6;
+    }
+
+    .cuis-hero-title {
+      font-family: var(--cuis-font-display);
+      font-size: clamp(2.5rem, 5.5vw, 3.85rem);
+      font-weight: var(--cuis-page-title-weight, 700);
+      letter-spacing: var(--cuis-display-tracking, -0.04em);
+      line-height: 1.05;
+      color: var(--cuis-text-primary);
+      margin: 0;
+    }
+
+    .cuis-hero-lead {
+      font-size: var(--cuis-section-title-size);
+      line-height: 1.65;
+      color: var(--cuis-text-secondary);
+      max-width: 62ch;
+      margin: 0.5rem 0 0;
+    }
+
+    .cuis-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+      margin-top: 1.25rem;
+    }
+
+    .cuis-hero-specs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: var(--cuis-label-size);
+      color: var(--cuis-text-secondary);
+      opacity: 0.7;
+      letter-spacing: 0.03em;
+      margin-top: 1.5rem;
+    }
+
+    .cuis-spec-dot {
+      opacity: 0.4;
+      font-size: var(--cuis-label-size);
+    }
+
+    /* Suite Architecture Card Grid */
+    .cuis-suite-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: var(--cuis-stack);
+    }
+
+    .cuis-suite-card {
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      border: 1px solid var(--cuis-border-subtle);
+      border-radius: 0.75rem;
+      padding: calc(var(--cuis-inset) * 1.15);
+      background: var(--cuis-surface-raised);
+      box-shadow: var(--cuis-elevation-card);
+      display: flex;
+      flex-direction: column;
+      gap: var(--cuis-stack-tight);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.15s ease;
+    }
+
+    .cuis-suite-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .cuis-suite-card[data-kit="core"]::before { background: var(--cuis-series-1); }
+    .cuis-suite-card[data-kit="viz"]::before { background: var(--cuis-series-2); }
+    .cuis-suite-card[data-kit="diag"]::before { background: var(--cuis-series-4); }
+    .cuis-suite-card[data-kit="bridge"]::before { background: var(--cuis-series-3); }
+
+    .cuis-suite-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cuis-suite-pkg {
+      font-family: var(--cuis-font-mono, monospace);
+      font-size: var(--cuis-label-size);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--cuis-text-primary);
+    }
+
+    .cuis-principle-idx {
+      font-family: var(--cuis-font-mono, monospace);
+      font-size: var(--cuis-label-size);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--cuis-text-secondary);
+      opacity: 0.7;
+    }
+
+    .cuis-feature-list {
+      margin: 0;
+      padding: 0 0 0 1.25rem;
+      color: var(--cuis-text-secondary);
+      font-size: var(--cuis-body-size);
+      line-height: 1.6;
+    }
+
+    /* Visual Suite Architecture Flow */
+    .cuis-arch-banner {
+      border: 1px solid var(--cuis-border-subtle);
+      border-radius: 0.75rem;
+      background: var(--cuis-surface-raised);
+      padding: var(--cuis-inset);
+      display: flex;
+      flex-direction: column;
+      gap: var(--cuis-stack-tight);
+    }
+
+    .cuis-arch-diagram {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: 1rem;
+      padding-top: 0.5rem;
+    }
+
+    .cuis-arch-node {
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      border: 1px solid var(--cuis-border-subtle);
+      border-radius: 0.5rem;
+      background: var(--cuis-surface-canvas);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .cuis-arch-node-title {
+      font-size: var(--cuis-body-size);
+      font-weight: 700;
+      color: var(--cuis-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cuis-arch-node-desc {
+      font-size: var(--cuis-label-size);
+      color: var(--cuis-text-secondary);
+      line-height: 1.45;
+    }
+
+    /* Feature Pillars */
+    .cuis-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: var(--cuis-stack);
+    }
+
+    /* Specimen Presentation & Copyable Code */
+    .cuis-specimen {
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      border: 1px solid var(--cuis-border-subtle);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      background: var(--cuis-surface-raised);
+      box-shadow: var(--cuis-elevation-card);
+    }
+
+    .cuis-specimen-preview {
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: var(--cuis-inset);
+      background: var(--cuis-surface-raised);
+    }
+
+    .cuis-specimen-code {
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      border-top: 1px solid var(--cuis-border-subtle);
+      background: var(--cuis-surface-canvas);
+      overflow: hidden;
+    }
+
+    .cuis-code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem var(--cuis-inset);
+      border-bottom: 1px solid var(--cuis-border-hairline);
+      background: color-mix(in srgb, var(--cuis-surface-canvas) 92%, black);
+    }
+
+    .cuis-code-lang {
+      font-family: var(--cuis-font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+      font-size: var(--cuis-label-size);
+      font-weight: 600;
+      color: var(--cuis-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .cuis-copy-btn {
+      font-size: var(--cuis-label-size) !important;
+      padding: 0.25rem 0.55rem !important;
+      height: auto !important;
+      border-radius: 0.25rem !important;
+    }
+
+    .cuis-specimen pre {
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      margin: 0;
+      padding: var(--cuis-inset);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      font-family: var(--cuis-font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+      font-size: var(--cuis-label-size);
+      line-height: 1.5;
+      color: var(--cuis-text-primary);
+      tab-size: 2;
+    }
+
+    /* Standalone & Embedded Table Scroll Containment */
+    .cuis-table-scroll {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      box-sizing: border-box;
+      border: 1px solid var(--cuis-border-subtle);
+      border-radius: 0.5rem;
+      background: var(--cuis-surface-raised);
+    }
+
+    .cuis-specimen-preview .cuis-table-scroll {
+      border: none;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    /* Density Visualizer Grid */
+    .cuis-density-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: var(--cuis-stack);
+      align-items: start;
+    }
+
+    /* Gallery Card Constraints */
+    .cuis-gallery-card-viz {
+      max-width: 600px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: var(--cuis-inset);
+      background: var(--cuis-surface-raised);
+      border: 1px solid var(--cuis-border-subtle);
+      border-radius: 0.75rem;
+      box-shadow: var(--cuis-elevation-card);
+      overflow: hidden;
+    }
+
+    .cuis-gallery-card-diag {
+      max-width: 1000px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: var(--cuis-inset);
+      background: var(--cuis-surface-raised);
+      border: 1px solid var(--cuis-border-subtle);
+      border-radius: 0.75rem;
+      box-shadow: var(--cuis-elevation-card);
+      overflow: hidden;
+    }
+
+    .cuis-gallery-grid-viz {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+      gap: var(--cuis-stack);
+      align-items: start;
+    }
+
+    .cuis-gallery-stack-diag {
+      display: flex;
+      flex-direction: column;
+      gap: var(--cuis-stack);
+    }
+
+    .cuis-card-header {
+      border-bottom: 1px solid var(--cuis-border-subtle);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .cuis-chart-container,
+    .cuis-diag-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    /* CDViz Companion Tables inside CUIS Cards */
+    .cuis-gallery-card-viz .cdviz-table,
+    .cuis-card .cdviz-table {
+      border-top: none;
+      font-family: var(--cuis-font-body);
+    }
+
+    .cuis-gallery-card-viz .cdviz-table caption,
+    .cuis-card .cdviz-table caption {
+      font-family: var(--cuis-font-body);
+      font-size: var(--cuis-label-size);
+      font-weight: var(--cuis-label-weight);
+      line-height: var(--cuis-label-leading);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--cuis-text-secondary);
+      padding-bottom: var(--cuis-stack-tight);
+    }
+
+    .cuis-gallery-card-viz .cdviz-table th,
+    .cuis-gallery-card-viz .cdviz-table td,
+    .cuis-card .cdviz-table th,
+    .cuis-card .cdviz-table td {
+      padding: var(--cuis-stack-tight);
+      border-bottom: 1px solid var(--cuis-border-subtle);
+      text-align: left;
+    }
+
+    .cuis-gallery-card-viz .cdviz-table thead th,
+    .cuis-card .cdviz-table thead th {
+      font-size: var(--cuis-label-size);
+      font-weight: var(--cuis-label-weight);
+      line-height: var(--cuis-label-leading);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--cuis-text-secondary);
+    }
+
+    .cuis-gallery-card-viz .cdviz-table tbody th,
+    .cuis-gallery-card-viz .cdviz-table tbody td,
+    .cuis-card .cdviz-table tbody th,
+    .cuis-card .cdviz-table tbody td {
+      font-size: var(--cuis-body-size);
+      font-weight: var(--cuis-body-weight);
+      line-height: var(--cuis-body-leading);
+      color: var(--cuis-text-primary);
+    }
+
+    .cuis-gallery-card-viz .cdviz-table .cdviz-num,
+    .cuis-card .cdviz-table .cdviz-num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cuis-docs-palette {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--cuis-stack);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .cuis-docs-palette li {
+      display: flex;
+      flex-direction: column;
+      gap: var(--cuis-stack-tight);
+      align-items: flex-start;
+    }
+
+    .cuis-docs-swatch {
+      width: 4.5rem;
+      height: 2.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--cuis-border-subtle);
+    }
+
+    .cuis-docs-swatch[data-role="action"] { background: var(--cuis-action-primary-background); }
+    .cuis-docs-swatch[data-role="surface-canvas"] { background: var(--cuis-surface-canvas); }
+    .cuis-docs-swatch[data-role="surface-raised"] { background: var(--cuis-surface-raised); }
+    .cuis-docs-swatch[data-role="status-info"] { background: var(--cuis-status-info); }
+    .cuis-docs-swatch[data-role="status-ok"] { background: var(--cuis-status-ok); }
+    .cuis-docs-swatch[data-role="status-warn"] { background: var(--cuis-status-warn); }
+    .cuis-docs-swatch[data-role="status-critical"] { background: var(--cuis-status-critical); }
+    .cuis-docs-swatch[data-series="1"] { background: var(--cuis-series-1); }
+    .cuis-docs-swatch[data-series="2"] { background: var(--cuis-series-2); }
+    .cuis-docs-swatch[data-series="3"] { background: var(--cuis-series-3); }
+    .cuis-docs-swatch[data-series="4"] { background: var(--cuis-series-4); }
+    .cuis-docs-swatch[data-series="5"] { background: var(--cuis-series-5); }
+
+    /* Footer Layout & Typography */
+    .cuis-footer {
+      border-top: 1px solid var(--cuis-border-subtle);
+      background: var(--cuis-surface-raised);
+      padding: calc(var(--cuis-stack) * 1.5) var(--cuis-inset) var(--cuis-stack);
+      margin-top: calc(var(--cuis-stack) * 2);
+    }
+
+    .cuis-footer-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.25fr 2fr;
+      gap: calc(var(--cuis-stack) * 1.5);
+    }
+
+    .cuis-footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--cuis-stack-tight);
+    }
+
+    .cuis-footer-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .cuis-footer-title {
+      display: block;
+      font-weight: 800;
+      font-size: var(--cuis-section-title-size);
+      letter-spacing: -0.025em;
+      color: var(--cuis-text-primary);
+    }
+
+    .cuis-footer-links-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .cuis-footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .cuis-footer-heading {
+      font-size: var(--cuis-label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--cuis-text-secondary);
+      margin-bottom: 0.25rem;
+    }
+
+    .cuis-footer-col a {
+      font-size: var(--cuis-label-size);
+      color: var(--cuis-text-secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .cuis-footer-col a:hover {
+      color: var(--cuis-action-primary-background);
+      text-decoration: underline;
+    }
+
+    .cuis-footer-bottom {
+      max-width: 1140px;
+      margin: calc(var(--cuis-stack) * 1.25) auto 0;
+      padding-top: var(--cuis-stack-tight);
+      border-top: 1px solid var(--cuis-border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* -------------------------------------------------------------------------
+       Responsive Breakpoints & Mobile Navigation
+       ------------------------------------------------------------------------- */
+    @media (max-width: 960px) {
+      .cuis-docs {
+        display: block;
+        min-height: 100vh;
+      }
+
+      .cuis-docs-body {
+        width: 100%;
+        min-width: 0;
+      }
+
+      /* Mobile Drawer Backdrop Scrim */
+      .cuis-sidebar-scrim {
+        display: block !important;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+        z-index: 998;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.24s ease;
+      }
+
+      body.cuis-nav-open .cuis-sidebar-scrim {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      body.cuis-nav-open {
+        overflow: hidden;
+      }
+
+      /* Mobile Drawer Sidebar */
+      .cuis-sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        width: 300px !important;
+        max-width: 85vw !important;
+        height: 100vh !important;
+        z-index: 999 !important;
+        background: var(--cuis-surface-raised) !important;
+        border-right: 1px solid var(--cuis-border-subtle) !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.28) !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        overflow-y: auto !important;
+        overscroll-behavior: contain;
+      }
+
+      body.cuis-nav-open .cuis-sidebar {
+        transform: translateX(0) !important;
+      }
+
+      .cuis-sidebar-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--cuis-border-subtle);
+      }
+
+      .cuis-mobile-close {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        color: var(--cuis-text-secondary);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .cuis-mobile-close:hover {
+        color: var(--cuis-text-primary);
+        background: var(--cuis-surface-hover);
+      }
+
+      .cuis-sidebar-mobile-controls {
+        display: flex !important;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: var(--cuis-surface-canvas);
+        border: 1px solid var(--cuis-border-subtle);
+        border-radius: 6px;
+        margin-top: 0.25rem;
+      }
+
+      /* Header Layout on Mobile */
+      .cuis-docs .cuis-header {
+        padding: 0 clamp(1.125rem, 4vw, 1.5rem);
+        gap: 0.5rem;
+      }
+
+      .cuis-header-controls .cuis-control {
+        display: none !important;
+      }
+
+      .cuis-header-left {
+        display: flex !important;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .cuis-mobile-toggle {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        color: var(--cuis-text-primary);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .cuis-mobile-brand {
+        display: inline-flex !important;
+        align-items: center;
+        gap: 0.45rem;
+        font-family: var(--cuis-font-display);
+        font-weight: 600;
+        font-size: var(--cuis-card-title-size);
+        color: var(--cuis-text-primary);
+        text-decoration: none;
+        letter-spacing: -0.015em;
+        white-space: nowrap;
+      }
+
+      .cuis-mobile-brand .cuis-brand-mark {
+        position: relative;
+        top: -1px;
+      }
+
+      .cuis-sidebar .cuis-brand-full {
+        display: none !important;
+      }
+
+      .cuis-sidebar .cuis-brand-short {
+        display: inline !important;
+      }
+
+      .cuis-header-controls {
+        gap: 0.4rem;
+      }
+
+      .cuis-footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .cuis-footer-links-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .cuis-github-text {
+        display: none;
+      }
+
+      .cuis-header-github {
+        padding: 0.4rem 0.55rem !important;
+      }
+
+      .cuis-docs .cuis-main {
+        padding: 1.5rem clamp(1.125rem, 4vw, 1.5rem) 4rem;
+        gap: calc(var(--cuis-stack) * 1.5);
+      }
+
+      .cuis-suite-grid,
+      .cuis-feature-grid,
+      .cuis-density-demo-grid,
+      .cuis-arch-diagram,
+      .cuis-gallery-grid-viz {
+        grid-template-columns: 1fr !important;
+      }
+
+      .cuis-arch-banner .cuis-spread {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      .cuis-gallery-card-viz,
+      .cuis-gallery-card-diag {
+        padding: 1rem;
+      }
+
+      .cuis-hero {
+        padding: 0 0 1rem;
+      }
+
+      .cuis-hero-graphic {
+        width: min(72%, 18rem);
+      }
+
+      .cuis-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cuis-hero-actions .cuis-button {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .cuis-hero-specs {
+        flex-wrap: wrap;
+        font-size: var(--cuis-label-size);
+        gap: 0.35rem 0.65rem;
+      }
+
+      .cuis-footer-links-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cuis-docs">
+    <!-- Backdrop Scrim for Mobile Drawer -->
+    <div id="cuis-sidebar-scrim" class="cuis-sidebar-scrim" aria-hidden="true"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="cuis-sidebar" class="cuis-sidebar" aria-label="Documentation Navigation">
+      <div class="cuis-sidebar-top-row">
+        <div class="cuis-stack-tight">
+          <a href="#about" class="cuis-logo-badge" title="Core UI System">
+            <svg class="cuis-brand-mark" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+              <polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" />
+              <g fill="none" stroke="currentColor" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" fill="none" />
+                <polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" fill="none" />
+                <polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" fill="none" />
+                <line x1="12" y1="8.7" x2="12" y2="1.5" />
+                <line x1="12" y1="15.3" x2="12" y2="22.5" />
+                <line x1="14.86" y1="10.35" x2="21.09" y2="6.75" />
+                <line x1="14.86" y1="13.65" x2="21.09" y2="17.25" />
+                <line x1="9.14" y1="10.35" x2="2.91" y2="6.75" />
+                <line x1="9.14" y1="13.65" x2="2.91" y2="17.25" />
+              </g>
+            </svg>
+            <span class="cuis-brand-full">Core UI System</span>
+            <span class="cuis-brand-short">CUIS</span>
+          </a>
+          <span class="cuis-label" style="font-size: var(--cuis-body-size); font-weight: 600; opacity: 0.85; padding-left: 0.25rem;">v0.1.0</span>
+        </div>
+        <button type="button" class="cuis-button cuis-button-quiet cuis-button-icon cuis-mobile-close" aria-label="Close navigation menu">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Drawer Controls (Theme & Density) -->
+      <div class="cuis-sidebar-mobile-controls">
+        <div class="cuis-control">
+          <label class="cuis-label" for="cuis-theme-mobile">Theme</label>
+          <select id="cuis-theme-mobile" class="cuis-select" data-cuis-set-theme>
+            <option value="core" selected>Core (Default)</option>
+            <option value="mono">Mono theme</option>
+            <option value="redhat">Red theme</option>
+          </select>
+        </div>
+        <div class="cuis-control">
+          <label class="cuis-label" for="cuis-density-mobile">Density</label>
+          <select id="cuis-density-mobile" class="cuis-select" data-cuis-set-density>
+            <option value="compact">Compact</option>
+            <option value="standard" selected>Standard</option>
+            <option value="comfortable">Comfortable</option>
+          </select>
+        </div>
+      </div>
+
+      <nav aria-label="Documentation Sections">
+        <div class="cuis-nav-group">
+          <span class="cuis-nav-heading">Overview</span>
+          <a href="#about" aria-current="page">About CUIS</a>
+          <a href="#suite">The CUIS Framework</a>
+          <a href="#principles">Core Principles</a>
+          <a href="#quickstart">Quickstart &amp; Install</a>
+        </div>
+
+        <div class="cuis-nav-group">
+          <span class="cuis-nav-heading">Foundations</span>
+          <a href="#tokens">Tokens &amp; Theming</a>
+          <a href="#type">Typography Roles</a>
+          <a href="#space">Space &amp; Density</a>
+          <a href="#color">Color &amp; Series</a>
+          <a href="#brand">Brand Mark</a>
+        </div>
+
+        <div class="cuis-nav-group">
+          <span class="cuis-nav-heading">Core Components</span>
+          <a href="#button">Button</a>
+          <a href="#input">Input &amp; Field</a>
+          <a href="#select">Select</a>
+          <a href="#card">Card &amp; Surface</a>
+          <a href="#kpi">KPI &amp; Metrics</a>
+          <a href="#table">Table</a>
+          <a href="#tabs">Tabs</a>
+          <a href="#dialog">Dialog</a>
+          <a href="#drawer">Drawer</a>
+          <a href="#chip">Chip</a>
+          <a href="#alert">Alert</a>
+          <a href="#bar">Capacity Bar</a>
+          <a href="#layout">Layout Primitives</a>
+        </div>
+
+        <div class="cuis-nav-group">
+          <span class="cuis-nav-heading">Patterns</span>
+          <a href="#shell">App Shell</a>
+          <a href="#rail">Nav-Detail Rail</a>
+        </div>
+
+        <div class="cuis-nav-group">
+          <span class="cuis-nav-heading">Companion Kits</span>
+          <a href="#dataviz">Data Viz (cdviz)</a>
+          <a href="#diagrams">Diagrams (cdiag)</a>
+          <a href="#bridging">Token Bridging</a>
+        </div>
+
+        <div class="cuis-nav-group">
+          <a href="#licenses">Licenses</a>
+        </div>
+      </nav>
+    </aside>
+
+    <div class="cuis-docs-body">
+      <!-- Top Header Navigation & Controls -->
+      <header class="cuis-header">
+        <div class="cuis-header-left">
+          <button type="button" class="cuis-button cuis-button-quiet cuis-button-icon cuis-mobile-toggle" aria-label="Toggle navigation menu" aria-controls="cuis-sidebar" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <a href="#about" class="cuis-mobile-brand" title="Core Design System">
+            <svg class="cuis-brand-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" />
+              <g fill="none" stroke="currentColor" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" fill="none" />
+                <polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" fill="none" />
+                <polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" fill="none" />
+                <line x1="12" y1="8.7" x2="12" y2="1.5" />
+                <line x1="12" y1="15.3" x2="12" y2="22.5" />
+                <line x1="14.86" y1="10.35" x2="21.09" y2="6.75" />
+                <line x1="14.86" y1="13.65" x2="21.09" y2="17.25" />
+                <line x1="9.14" y1="10.35" x2="2.91" y2="6.75" />
+                <line x1="9.14" y1="13.65" x2="2.91" y2="17.25" />
+              </g>
+            </svg>
+            <span>Core Design System</span>
+          </a>
+        </div>
+
+        <div class="cuis-header-controls">
+          <div class="cuis-control cuis-header-theme-control">
+            <label class="cuis-label" for="cuis-theme">Theme</label>
+            <select id="cuis-theme" class="cuis-select" data-cuis-set-theme>
+              <option value="core" selected>Core (Default)</option>
+              <option value="mono">Mono theme</option>
+              <option value="redhat">Red theme</option>
+            </select>
+          </div>
+          <div class="cuis-control cuis-header-density-control">
+            <label class="cuis-label" for="cuis-density">Density</label>
+            <select id="cuis-density" class="cuis-select" data-cuis-set-density>
+              <option value="compact">Compact</option>
+              <option value="standard" selected>Standard</option>
+              <option value="comfortable">Comfortable</option>
+            </select>
+          </div>
+          <button type="button" class="cuis-button cuis-button-quiet cuis-button-icon" data-cuis-toggle-appearance aria-label="Use dark appearance" title="Toggle dark / light appearance">
+            <svg class="cuis-icon-dark" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" aria-hidden="true"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/></svg>
+            <svg class="cuis-icon-light" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg>
+          </button>
+          <a href="https://github.com/robchappell/cuis" class="cuis-button cuis-button-quiet cuis-header-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository" style="display: inline-flex; align-items: center; gap: 0.35rem;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <span class="cuis-github-text">GitHub</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Main Content Column -->
+      <main class="cuis-main cuis-stack">
+
+        <!-- 1. Hero / About Section -->
+        <section id="about" class="cuis-hero">
+          <div class="cuis-hero-graphic" aria-hidden="true">
+            <svg class="cuis-hero-mark" viewBox="0 0 24 24"><polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" /><g fill="none" stroke="currentColor" stroke-width="0.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" /><polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" /><polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" /><line x1="12" y1="8.7" x2="12" y2="1.5" /><line x1="12" y1="15.3" x2="12" y2="22.5" /><line x1="14.86" y1="10.35" x2="21.09" y2="6.75" /><line x1="14.86" y1="13.65" x2="21.09" y2="17.25" /><line x1="9.14" y1="10.35" x2="2.91" y2="6.75" /><line x1="9.14" y1="13.65" x2="2.91" y2="17.25" /></g></svg>
+            <svg class="cuis-hero-mark" viewBox="0 0 24 24"><polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" /><g fill="none" stroke="currentColor" stroke-width="0.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" /><polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" /><polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" /><line x1="12" y1="8.7" x2="12" y2="1.5" /><line x1="12" y1="15.3" x2="12" y2="22.5" /><line x1="14.86" y1="10.35" x2="21.09" y2="6.75" /><line x1="14.86" y1="13.65" x2="21.09" y2="17.25" /><line x1="9.14" y1="10.35" x2="2.91" y2="6.75" /><line x1="9.14" y1="13.65" x2="2.91" y2="17.25" /></g></svg>
+            <svg class="cuis-hero-mark" viewBox="0 0 24 24"><polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" /><g fill="none" stroke="currentColor" stroke-width="0.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" /><polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" /><polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" /><line x1="12" y1="8.7" x2="12" y2="1.5" /><line x1="12" y1="15.3" x2="12" y2="22.5" /><line x1="14.86" y1="10.35" x2="21.09" y2="6.75" /><line x1="14.86" y1="13.65" x2="21.09" y2="17.25" /><line x1="9.14" y1="10.35" x2="2.91" y2="6.75" /><line x1="9.14" y1="13.65" x2="2.91" y2="17.25" /></g></svg>
+            <svg class="cuis-hero-mark" viewBox="0 0 24 24"><polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" /><g fill="none" stroke="currentColor" stroke-width="0.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" /><polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" /><polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" /><line x1="12" y1="8.7" x2="12" y2="1.5" /><line x1="12" y1="15.3" x2="12" y2="22.5" /><line x1="14.86" y1="10.35" x2="21.09" y2="6.75" /><line x1="14.86" y1="13.65" x2="21.09" y2="17.25" /><line x1="9.14" y1="10.35" x2="2.91" y2="6.75" /><line x1="9.14" y1="13.65" x2="2.91" y2="17.25" /></g></svg>
+            <svg class="cuis-hero-mark" viewBox="0 0 24 24"><polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" /><g fill="none" stroke="currentColor" stroke-width="0.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" /><polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" /><polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" /><line x1="12" y1="8.7" x2="12" y2="1.5" /><line x1="12" y1="15.3" x2="12" y2="22.5" /><line x1="14.86" y1="10.35" x2="21.09" y2="6.75" /><line x1="14.86" y1="13.65" x2="21.09" y2="17.25" /><line x1="9.14" y1="10.35" x2="2.91" y2="6.75" /><line x1="9.14" y1="13.65" x2="2.91" y2="17.25" /></g></svg>
+          </div>
+
+          <h1 class="cuis-hero-title">Core UI System</h1>
+
+          <p class="cuis-hero-lead">
+            Core UI System (CUIS) is an ultra-lightweight, zero-dependency design framework built entirely on native web standards. Engineered with pure HTML5 semantics, modern CSS custom properties, deterministic density scaling, instant theming, and accessible data visualization out of the box.
+          </p>
+
+          <div class="cuis-hero-actions">
+            <a href="#suite" class="cuis-button">Explore the Framework</a>
+            <a href="#quickstart" class="cuis-button cuis-button-quiet">Quickstart Guide</a>
+            <a href="#button" class="cuis-button cuis-button-quiet">Browse Components</a>
+          </div>
+
+          <div class="cuis-hero-specs">
+            <span>Open Source</span>
+            <span class="cuis-spec-dot">&bull;</span>
+            <span>Zero Dependencies</span>
+            <span class="cuis-spec-dot">&bull;</span>
+            <span>&lt;25KB CSS</span>
+            <span class="cuis-spec-dot">&bull;</span>
+            <span>~3KB JS</span>
+            <span class="cuis-spec-dot">&bull;</span>
+            <span>WCAG 2.2 AA</span>
+          </div>
+        </section>
+
+        <!-- 2. The Suite of Tools -->
+        <section id="suite" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Architecture &amp; Packaging</span>
+            <h2 class="cuis-section-title">The CUIS Framework</h2>
+            <p class="cuis-body">
+              CUIS is architected as an integrated suite of three autonomous, zero-dependency design kits linked by a clean CSS Custom Property bridge. Each kit works standalone in any web stack, but together they deliver an enterprise-ready design system and data visualization suite.
+            </p>
+          </div>
+
+          <!-- Suite 3-Column Grid -->
+          <div class="cuis-suite-grid">
+            <!-- Kit 1: CUIS Core -->
+            <article class="cuis-suite-card" data-kit="core">
+              <div class="cuis-suite-meta">
+                <span class="cuis-suite-pkg">packages/core</span>
+                <span class="cuis-label">&lt;25KB CSS / ~3KB JS</span>
+              </div>
+              <h3 class="cuis-card-title">Core UI System</h3>
+              <p class="cuis-body">
+                The interface foundation. Semantic design tokens, typography roles, layout primitives, and 13 native HTML5 components with 3-tier density and multi-theme support.
+              </p>
+              <ul class="cuis-feature-list">
+                <li>Deterministic <code>compact</code>, <code>standard</code>, <code>comfortable</code> density</li>
+                <li>Instant <code>light</code> and <code>dark</code> appearance switching</li>
+                <li>Zero node_modules, pure CSS + vanilla JS controller</li>
+                <li>WCAG 2.2 AA accessible out of the box</li>
+              </ul>
+              <div class="cuis-spread" style="margin-top: auto; padding-top: 0.5rem;">
+                <a href="#button" class="cuis-button cuis-button-quiet" style="font-size: var(--cuis-label-size);">View Components &rarr;</a>
+              </div>
+            </article>
+
+            <!-- Kit 2: CDViz -->
+            <article class="cuis-suite-card" data-kit="viz">
+              <div class="cuis-suite-meta">
+                <span class="cuis-suite-pkg">packages/viz</span>
+                <span class="cuis-label">19 SVG Charts</span>
+              </div>
+              <h3 class="cuis-card-title">Core Data Visualization Kit</h3>
+              <p class="cuis-body">
+                Quantitative chart suite. 19 declarative SVG chart types with automatic accessible tabular companions, native tooltips, and zero runtime dependencies.
+              </p>
+              <ul class="cuis-feature-list">
+                <li>Declarative JSON spec rendering via <code>CDViz.render()</code></li>
+                <li>Automatic paired HTML data table for screen readers</li>
+                <li>Bars, Donuts, Gauges, Lines, Areas, Bullets, Scatter</li>
+                <li>Strictly refuses foreign tokens; completely self-contained</li>
+              </ul>
+              <div class="cuis-spread" style="margin-top: auto; padding-top: 0.5rem;">
+                <a href="#dataviz" class="cuis-button cuis-button-quiet" style="font-size: var(--cuis-label-size);">View 19 Charts &rarr;</a>
+              </div>
+            </article>
+
+            <!-- Kit 3: CDDiag -->
+            <article class="cuis-suite-card" data-kit="diag">
+              <div class="cuis-suite-meta">
+                <span class="cuis-suite-pkg">packages/diag</span>
+                <span class="cuis-label">11 Diagrams</span>
+              </div>
+              <h3 class="cuis-card-title">Core Diagramming Kit</h3>
+              <p class="cuis-body">
+                Structural and relational visualization diagrams suite. 11 declarative SVG diagram renderers with clean orthogonal routing and accessible nested outline navigation.
+              </p>
+              <ul class="cuis-feature-list">
+                <li>Declarative JSON spec rendering via <code>CDDiag.render()</code></li>
+                <li>Accessible nested <code>&lt;details&gt;</code> outline navigator</li>
+                <li>Mind maps, Flowcharts, Trees, ERDs, Sequences, States</li>
+                <li>Zero dependencies; zero framework lock-in</li>
+              </ul>
+              <div class="cuis-spread" style="margin-top: auto; padding-top: 0.5rem;">
+                <a href="#diagrams" class="cuis-button cuis-button-quiet" style="font-size: var(--cuis-label-size);">View 11 Diagrams &rarr;</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Token Bridge Architectural Banner -->
+          <div class="cuis-arch-banner">
+            <div class="cuis-spread">
+              <div class="cuis-stack-tight">
+                <span class="cuis-kicker">The Unifying Bridge</span>
+                <h3 class="cuis-card-title">Token bridging layer (<code>packages/bridge</code>)</h3>
+                <p class="cuis-body" style="max-width: 72ch;">
+                  How do zero-dependency engines stay visually cohesive without coupling their codebases? The token bridge (<code>bridges/kits.css</code>) translates host theme variables into kit custom properties purely in CSS.
+                </p>
+              </div>
+              <a href="#bridging" class="cuis-button cuis-button-quiet" style="font-size: var(--cuis-label-size);">Bridge Spec &rarr;</a>
+            </div>
+
+            <div class="cuis-arch-diagram">
+              <div class="cuis-arch-node">
+                <div class="cuis-arch-node-title">
+                  <span class="cuis-swatch" data-series="1" style="width: 12px; height: 12px; border-radius: 2px;"></span>
+                  Host App (CUIS)
+                </div>
+                <div class="cuis-arch-node-desc">Declares <code>--cuis-series-1..5</code>, surfaces, and active <code>data-cuis-appearance</code>.</div>
+              </div>
+
+              <div class="cuis-arch-node" style="border-color: var(--cuis-action-primary-background);">
+                <div class="cuis-arch-node-title">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16l-4-4m0 0l4-4m-4 4h18m-4 4l4-4m0 0l-4-4"/></svg>
+                  bridges/kits.css
+                </div>
+                <div class="cuis-arch-node-desc">Pure CSS custom property mapping. Zero JS overhead, zero foreign token leakage.</div>
+              </div>
+
+              <div class="cuis-arch-node">
+                <div class="cuis-arch-node-title">
+                  <span class="cuis-swatch" data-series="2" style="width: 12px; height: 12px; border-radius: 2px;"></span>
+                  CDViz &amp; CDDiag
+                </div>
+                <div class="cuis-arch-node-desc">Read their native <code>--cdviz-*</code> and <code>--cdiag-*</code> tokens. Never touch CUIS code.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Principles Section -->
+        <section id="principles" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Invariants</span>
+            <h2 class="cuis-section-title">Core Principles</h2>
+            <p class="cuis-body">Six architectural invariants that govern every layout and component in the suite.</p>
+          </div>
+
+          <div class="cuis-feature-grid">
+            <article class="cuis-card cuis-stack-tight">
+              <span class="cuis-principle-idx">01 / STACK</span>
+              <h3 class="cuis-card-title">Stack Owns Vertical Rhythm</h3>
+              <p class="cuis-body">Headings, paragraphs, and cards have no margins. The layout container (<code>.cuis-stack</code> or <code>.cuis-stack-tight</code>) owns all spacing.</p>
+            </article>
+
+            <article class="cuis-card cuis-stack-tight">
+              <span class="cuis-principle-idx">02 / ROLE</span>
+              <h3 class="cuis-card-title">Role: One Role, One Job</h3>
+              <p class="cuis-body">Typography has exactly six role sizes. A page uses these strict roles and never introduces arbitrary pixel sizes.</p>
+            </article>
+
+            <article class="cuis-card cuis-stack-tight">
+              <span class="cuis-principle-idx">03 / DENSITY</span>
+              <h3 class="cuis-card-title">Density Changes Space, Not Type</h3>
+              <p class="cuis-body">Density alters padding and gaps (stack, inset, header), leaving typographic scale and readability unchanged.</p>
+            </article>
+
+            <article class="cuis-card cuis-stack-tight">
+              <span class="cuis-principle-idx">04 / NATIVE</span>
+              <h3 class="cuis-card-title">Native Elements First</h3>
+              <p class="cuis-body">Always use the semantic element matching the task: <code>&lt;button&gt;</code> commits, <code>&lt;a&gt;</code> navigates, <code>&lt;table&gt;</code> compares rows, and <code>&lt;dialog&gt;</code> asks for decisions.</p>
+            </article>
+
+            <article class="cuis-card cuis-stack-tight">
+              <span class="cuis-principle-idx">05 / INTENT</span>
+              <h3 class="cuis-card-title">Intent is Not a Color</h3>
+              <p class="cuis-body">Submit is not a color fill. Status is not an action. Color is reserved for semantic state and categorical series tokens.</p>
+            </article>
+
+            <article class="cuis-card cuis-stack-tight">
+              <span class="cuis-principle-idx">06 / BOUNDARY</span>
+              <h3 class="cuis-card-title">Strict Token Boundaries</h3>
+              <p class="cuis-body">Components read only semantic <code>--cuis-*</code> tokens. Foreign framework prefixes are forbidden, keeping the design system completely portable.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 4. Quickstart & Installation -->
+        <section id="quickstart" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Deployment</span>
+            <h2 class="cuis-section-title">Quickstart &amp; Installation</h2>
+            <p class="cuis-body">Deploy the CUIS suite with zero dependencies in any HTML document or modern web project.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview cuis-stack-tight">
+              <div class="cuis-spread">
+                <h3 class="cuis-card-title">Link the files</h3>
+                <span class="cuis-label">Recommended</span>
+              </div>
+              <p class="cuis-body">Include the theme, component stylesheet, and micro-controller directly in your document head:</p>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-quickstart">Copy</button>
+              </div>
+              <pre id="code-quickstart"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en" data-cuis-theme="core" data-cuis-appearance="light" data-cuis-density="standard"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;My Application&lt;/title&gt;
+  &lt;!-- Theme Primitives &amp; Fallbacks --&gt;
+  &lt;link rel="stylesheet" href="packages/core/themes/core.css"&gt;
+  &lt;!-- Core Component System --&gt;
+  &lt;link rel="stylesheet" href="packages/core/cuis.css"&gt;
+  &lt;!-- Companion Kits (Optional) --&gt;
+  &lt;link rel="stylesheet" href="packages/viz/cdviz.css"&gt;
+  &lt;link rel="stylesheet" href="packages/diag/cdiag.css"&gt;
+  &lt;link rel="stylesheet" href="packages/bridge/kits.css"&gt;
+  &lt;!-- Controllers --&gt;
+  &lt;script src="packages/core/cuis.js" defer&gt;&lt;/script&gt;
+  &lt;script src="packages/viz/cdviz.js" defer&gt;&lt;/script&gt;
+  &lt;script src="packages/diag/cdiag.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="cuis-app cuis-stack"&gt;
+    &lt;header class="cuis-app-header"&gt;
+      &lt;span class="cuis-page-title"&gt;My Application&lt;/span&gt;
+      &lt;div class="cuis-tools"&gt;
+        &lt;button type="button" class="cuis-button cuis-button-quiet cuis-button-icon" data-cuis-toggle-appearance aria-label="Toggle appearance"&gt;
+          &lt;svg class="cuis-icon-dark" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"&gt;&lt;path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/&gt;&lt;/svg&gt;
+          &lt;svg class="cuis-icon-light" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"&gt;&lt;circle cx="12" cy="12" r="4"/&gt;&lt;path d="M12 2v2"/&gt;&lt;path d="M12 20v2"/&gt;&lt;path d="M4.93 4.93l1.41 1.41"/&gt;&lt;path d="M17.66 17.66l1.41 1.41"/&gt;&lt;path d="M2 12h2"/&gt;&lt;path d="M20 12h2"/&gt;&lt;path d="M6.34 17.66l-1.41 1.41"/&gt;&lt;path d="M19.07 4.93l-1.41 1.41"/&gt;&lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+    &lt;main class="cuis-main cuis-stack"&gt;
+      &lt;article class="cuis-card cuis-stack-tight"&gt;
+        &lt;h2 class="cuis-card-title"&gt;Welcome to CUIS&lt;/h2&gt;
+        &lt;p class="cuis-body"&gt;High-craft UI built entirely on native Web Standards.&lt;/p&gt;
+        &lt;button type="button" class="cuis-button"&gt;Get Started&lt;/button&gt;
+      &lt;/article&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Tokens & Theming -->
+        <section id="tokens" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Foundations</span>
+            <h2 class="cuis-section-title">Tokens &amp; Theming Architecture</h2>
+            <p class="cuis-body">
+              CUIS strictly separates <strong>Primitives</strong> (raw colors, fonts) from <strong>Semantic Tokens</strong> (surfaces, actions, text, focus rings, borders). Components consume semantic tokens only, allowing seamless theme switching with zero runtime overhead.
+            </p>
+          </div>
+
+          <!-- 3 Built-in Themes Grid -->
+          <div class="cuis-suite-grid">
+            <article class="cuis-suite-card" data-kit="core">
+              <span class="cuis-kicker">Default System</span>
+              <h3 class="cuis-card-title">Core Theme</h3>
+              <p class="cuis-body">
+                Balanced, neutral foundation using Source Sans 3 typography and sapphire action styling (<code>#1b4f9c</code>).
+              </p>
+              <div class="cuis-row" style="margin-top: auto; padding-top: 0.5rem;">
+                <button type="button" class="cuis-button cuis-button-quiet" onclick="CUIS.setTheme('core'); const s=document.getElementById('cuis-theme'); if(s)s.value='core';" style="font-size: var(--cuis-label-size);">Activate Core Theme</button>
+              </div>
+            </article>
+
+            <article class="cuis-suite-card" data-kit="bridge">
+              <span class="cuis-kicker">Architectural Minimal</span>
+              <h3 class="cuis-card-title">Mono Theme</h3>
+              <p class="cuis-body">
+                Minimalist black-and-white aesthetic. Features Geist &amp; Geist Mono typography, bone/obsidian surfaces, and crisp hairlines.
+              </p>
+              <div class="cuis-row" style="margin-top: auto; padding-top: 0.5rem;">
+                <button type="button" class="cuis-button cuis-button-quiet" onclick="CUIS.setTheme('mono'); const s=document.getElementById('cuis-theme'); if(s)s.value='mono';" style="font-size: var(--cuis-label-size);">Activate Mono Theme</button>
+              </div>
+            </article>
+
+            <article class="cuis-suite-card" data-kit="diag">
+              <span class="cuis-kicker">Vibrant &amp; Open</span>
+              <h3 class="cuis-card-title">Red theme</h3>
+              <p class="cuis-body">
+                Inspired by Red Hat. Uses the open-source Red Hat Display and Red Hat Text fonts and a crimson action color (<code>#ee0000</code>). This theme is not a Red Hat product.
+              </p>
+              <div class="cuis-row" style="margin-top: auto; padding-top: 0.5rem;">
+                <button type="button" class="cuis-button cuis-button-quiet" onclick="CUIS.setTheme('redhat'); const s=document.getElementById('cuis-theme'); if(s)s.value='redhat';" style="font-size: var(--cuis-label-size);">Activate Red Theme</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview cuis-stack-tight">
+              <h3 class="cuis-card-title">Authoring Custom Themes</h3>
+              <p class="cuis-body">To author any brand theme, map your typography and surface primitives to the semantic contract in pure CSS. Here is the implementation of the <strong>Mono theme</strong>:</p>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">CSS</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-theme">Copy</button>
+              </div>
+              <pre id="code-theme"><code>/* Mono Theme (Architectural Minimal) */
+html[data-cuis-theme="mono"] {
+  /* Geist Sans &amp; Geist Mono Typography */
+  --cuis-font-display: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --cuis-font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --cuis-font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  --cuis-display-tracking: -0.04em;
+
+  /* Monochromatic Actions &amp; Hairlines */
+  --cuis-action-primary-background: #111111;
+  --cuis-action-primary-text: #f5f5f0;
+  --cuis-border-subtle: rgba(17, 17, 17, 0.12);
+
+  /* Five-Tier Grayscale Categorical Series */
+  --cuis-series-1: #111111;
+  --cuis-series-2: #3f3f46;
+  --cuis-series-3: #71717a;
+  --cuis-series-4: #a1a1aa;
+  --cuis-series-5: #d4d4d8;
+}
+
+/* Dark Appearance (Obsidian Canvas) */
+html[data-cuis-theme="mono"][data-cuis-appearance="dark"] {
+  --cuis-surface-canvas: #111111;
+  --cuis-surface-raised: #18181b;
+  --cuis-action-primary-background: #f5f5f0;
+  --cuis-action-primary-text: #111111;
+  --cuis-border-subtle: rgba(255, 255, 255, 0.12);
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Typography Roles -->
+        <section id="type" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Foundations</span>
+            <h2 class="cuis-section-title">Typography System</h2>
+            <p class="cuis-body">Exactly six role sizes govern all text. A page uses these strict roles and never introduces arbitrary pixel sizes.</p>
+          </div>
+
+          <div class="cuis-table-scroll">
+            <table class="cuis-table">
+              <thead>
+                <tr>
+                  <th scope="col">Role Class</th>
+                  <th scope="col">Visual Specimen</th>
+                  <th scope="col">Size</th>
+                  <th scope="col">Weight</th>
+                  <th scope="col">Line Height</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.cuis-page-title</code></td>
+                  <td><span class="cuis-page-title">Page Title</span></td>
+                  <td>1.5rem (24px)</td>
+                  <td>600 / 700</td>
+                  <td>1.25</td>
+                </tr>
+                <tr>
+                  <td><code>.cuis-section-title</code></td>
+                  <td><span class="cuis-section-title">Section Title</span></td>
+                  <td>1.125rem (18px)</td>
+                  <td>600</td>
+                  <td>1.35</td>
+                </tr>
+                <tr>
+                  <td><code>.cuis-card-title</code></td>
+                  <td><span class="cuis-card-title">Card Title</span></td>
+                  <td>1rem (16px)</td>
+                  <td>600</td>
+                  <td>1.35</td>
+                </tr>
+                <tr>
+                  <td><code>.cuis-metric</code></td>
+                  <td><span class="cuis-metric">1,280</span></td>
+                  <td>1.75rem (28px)</td>
+                  <td>600</td>
+                  <td>1.15 (tabular)</td>
+                </tr>
+                <tr>
+                  <td><code>.cuis-body</code></td>
+                  <td><span class="cuis-body">Standard reading and cell copy (max 66ch, pretty)</span></td>
+                  <td>0.9375rem (15px)</td>
+                  <td>400</td>
+                  <td>1.50</td>
+                </tr>
+                <tr>
+                  <td><code>.cuis-label</code></td>
+                  <td><span class="cuis-label">Column headers, captions, metadata</span></td>
+                  <td>0.8125rem (13px)</td>
+                  <td>500</td>
+                  <td>1.35</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 7. Space & Density -->
+        <section id="space" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Foundations</span>
+            <h2 class="cuis-section-title">Space Roles &amp; Density</h2>
+            <p class="cuis-body">Density modifies spatial rhythm (stack, inset, header) without altering type sizes. It can be applied globally to <code>&lt;html&gt;</code> or locally to any component.</p>
+          </div>
+
+          <div class="cuis-table-scroll">
+            <table class="cuis-table">
+              <thead>
+                <tr>
+                  <th scope="col">Space Role</th>
+                  <th scope="col">Compact</th>
+                  <th scope="col">Standard</th>
+                  <th scope="col">Comfortable</th>
+                  <th scope="col">Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>--cuis-stack</code></td>
+                  <td>1.5rem (24px)</td>
+                  <td>2.0rem (32px)</td>
+                  <td>2.5rem (40px)</td>
+                  <td>Vertical rhythm between major sections and cards.</td>
+                </tr>
+                <tr>
+                  <td><code>--cuis-stack-tight</code></td>
+                  <td>0.5rem (8px)</td>
+                  <td>0.75rem (12px)</td>
+                  <td>1.0rem (16px)</td>
+                  <td>Internal spacing between labels, headings, and fields.</td>
+                </tr>
+                <tr>
+                  <td><code>--cuis-inset</code></td>
+                  <td>1.0rem (16px)</td>
+                  <td>1.25rem (20px)</td>
+                  <td>1.5rem (24px)</td>
+                  <td>Internal card, drawer, and specimen padding.</td>
+                </tr>
+                <tr>
+                  <td><code>--cuis-header</code></td>
+                  <td>3.0rem (48px)</td>
+                  <td>3.5rem (56px)</td>
+                  <td>4.0rem (64px)</td>
+                  <td>Fixed navigation bar clearance.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cuis-density-demo-grid">
+            <article class="cuis-card cuis-stack-tight" data-cuis-density="compact">
+              <span class="cuis-kicker">Compact Density</span>
+              <h3 class="cuis-card-title">High Information Density</h3>
+              <p class="cuis-body">Ideal for monitoring dashboards, dense tables, and data entry grids.</p>
+              <div class="cuis-row">
+                <span class="cuis-chip cuis-chip-info">Active</span>
+                <span class="cuis-label">8px tight / 16px inset</span>
+              </div>
+            </article>
+
+            <article class="cuis-card cuis-stack-tight" data-cuis-density="standard">
+              <span class="cuis-kicker">Standard Density</span>
+              <h3 class="cuis-card-title">Balanced Baseline</h3>
+              <p class="cuis-body">The standard configuration for general purpose applications and portals.</p>
+              <div class="cuis-row">
+                <span class="cuis-chip cuis-chip-ok">Nominal</span>
+                <span class="cuis-label">12px tight / 20px inset</span>
+              </div>
+            </article>
+
+            <article class="cuis-card cuis-stack-tight" data-cuis-density="comfortable">
+              <span class="cuis-kicker">Comfortable Density</span>
+              <h3 class="cuis-card-title">Breathable Layout</h3>
+              <p class="cuis-body">Designed for long-form reading, documentation, and executive summaries.</p>
+              <div class="cuis-row">
+                <span class="cuis-chip cuis-chip-warn">Attention</span>
+                <span class="cuis-label">16px tight / 24px inset</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 8. Color & Series -->
+        <section id="color" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Foundations</span>
+            <h2 class="cuis-section-title">Color System &amp; Categorical Series</h2>
+            <p class="cuis-body">Chrome remains neutral. The action color highlights interactive controls. Five calibrated series tokens encode categorical data in charts, chips, and bars.</p>
+          </div>
+
+          <ul class="cuis-docs-palette">
+            <li><span class="cuis-docs-swatch" data-role="action"></span><span class="cuis-label">Action</span></li>
+            <li><span class="cuis-docs-swatch" data-series="1"></span><span class="cuis-label">Series 1</span></li>
+            <li><span class="cuis-docs-swatch" data-series="2"></span><span class="cuis-label">Series 2</span></li>
+            <li><span class="cuis-docs-swatch" data-series="3"></span><span class="cuis-label">Series 3</span></li>
+            <li><span class="cuis-docs-swatch" data-series="4"></span><span class="cuis-label">Series 4</span></li>
+            <li><span class="cuis-docs-swatch" data-series="5"></span><span class="cuis-label">Series 5</span></li>
+            <li><span class="cuis-docs-swatch" data-role="status-info"></span><span class="cuis-label">Status Info</span></li>
+            <li><span class="cuis-docs-swatch" data-role="status-ok"></span><span class="cuis-label">Status Ok</span></li>
+            <li><span class="cuis-docs-swatch" data-role="status-warn"></span><span class="cuis-label">Status Warn</span></li>
+            <li><span class="cuis-docs-swatch" data-role="status-critical"></span><span class="cuis-label">Status Crit</span></li>
+          </ul>
+        </section>
+
+        <!-- Brand Mark Specimen -->
+        <section id="brand" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Identity &amp; Iconography</span>
+            <h2 class="cuis-section-title">CUIS Brand Mark</h2>
+            <p class="cuis-body">The CUIS brand mark is a mathematically constructed scalable vector mark. Built as a regular hexagon with concentric facets radiating from an inscribed solid nucleus, it embodies the compact core architecture of the design system. Designed for crisp rendering across all sizes, from 16px navigation badges to hero displays.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview cuis-stack" style="align-items: stretch; gap: 1.5rem;">
+              <div class="cuis-row" style="justify-content: space-around; flex-wrap: wrap; gap: 2rem; padding: 1rem 0;">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <span class="cuis-label">64px Display</span>
+                  <svg class="cuis-brand-mark" viewBox="0 0 24 24" width="64" height="64" aria-hidden="true">
+                    <polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" />
+                    <g fill="none" stroke="currentColor" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" fill="none" />
+                      <polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" fill="none" />
+                      <polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" fill="none" />
+                      <line x1="12" y1="8.7" x2="12" y2="1.5" />
+                      <line x1="12" y1="15.3" x2="12" y2="22.5" />
+                      <line x1="14.86" y1="10.35" x2="21.09" y2="6.75" />
+                      <line x1="14.86" y1="13.65" x2="21.09" y2="17.25" />
+                      <line x1="9.14" y1="10.35" x2="2.91" y2="6.75" />
+                      <line x1="9.14" y1="13.65" x2="2.91" y2="17.25" />
+                    </g>
+                  </svg>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <span class="cuis-label">36px Footer</span>
+                  <svg class="cuis-brand-mark" viewBox="0 0 24 24" width="36" height="36" aria-hidden="true">
+                    <polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" />
+                    <g fill="none" stroke="currentColor" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" fill="none" />
+                      <polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" fill="none" />
+                      <polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" fill="none" />
+                      <line x1="12" y1="8.7" x2="12" y2="1.5" />
+                      <line x1="12" y1="15.3" x2="12" y2="22.5" />
+                      <line x1="14.86" y1="10.35" x2="21.09" y2="6.75" />
+                      <line x1="14.86" y1="13.65" x2="21.09" y2="17.25" />
+                      <line x1="9.14" y1="10.35" x2="2.91" y2="6.75" />
+                      <line x1="9.14" y1="13.65" x2="2.91" y2="17.25" />
+                    </g>
+                  </svg>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <span class="cuis-label">24px Masthead</span>
+                  <svg class="cuis-brand-mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                    <polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" />
+                    <g fill="none" stroke="currentColor" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" fill="none" />
+                      <polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" fill="none" />
+                      <polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" fill="none" />
+                      <line x1="12" y1="8.7" x2="12" y2="1.5" />
+                      <line x1="12" y1="15.3" x2="12" y2="22.5" />
+                      <line x1="14.86" y1="10.35" x2="21.09" y2="6.75" />
+                      <line x1="14.86" y1="13.65" x2="21.09" y2="17.25" />
+                      <line x1="9.14" y1="10.35" x2="2.91" y2="6.75" />
+                      <line x1="9.14" y1="13.65" x2="2.91" y2="17.25" />
+                    </g>
+                  </svg>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <span class="cuis-label">16px Inline</span>
+                  <svg class="cuis-brand-mark" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" />
+                    <g fill="none" stroke="currentColor" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" fill="none" />
+                      <polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" fill="none" />
+                      <polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" fill="none" />
+                      <line x1="12" y1="8.7" x2="12" y2="1.5" />
+                      <line x1="12" y1="15.3" x2="12" y2="22.5" />
+                      <line x1="14.86" y1="10.35" x2="21.09" y2="6.75" />
+                      <line x1="14.86" y1="13.65" x2="21.09" y2="17.25" />
+                      <line x1="9.14" y1="10.35" x2="2.91" y2="6.75" />
+                      <line x1="9.14" y1="13.65" x2="2.91" y2="17.25" />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="cuis-row" style="justify-content: flex-start; gap: 0.75rem;">
+                <a href="cuis-mark.svg" download class="cuis-button" style="text-decoration: none;">Download SVG Mark</a>
+                <a href="favicon.svg" target="_blank" class="cuis-button cuis-button-quiet" style="text-decoration: none;">View Favicon Asset</a>
+              </div>
+            </div>
+
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">SVG</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-brand-mark">Copy SVG</button>
+              </div>
+              <pre id="code-brand-mark"><code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="cuis-brand-mark" aria-hidden="true"&gt;
+  &lt;!-- CUIS Solid Central Core --&gt;
+  &lt;polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" /&gt;
+  &lt;!-- Concentric Hexagonal Rings &amp; Radiating Struts --&gt;
+  &lt;g fill="none" stroke="currentColor" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round"&gt;
+    &lt;polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" fill="none" /&gt;
+    &lt;polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" fill="none" /&gt;
+    &lt;polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" fill="none" /&gt;
+    &lt;line x1="12" y1="8.7" x2="12" y2="1.5" /&gt;
+    &lt;line x1="12" y1="15.3" x2="12" y2="22.5" /&gt;
+    &lt;line x1="14.86" y1="10.35" x2="21.09" y2="6.75" /&gt;
+    &lt;line x1="14.86" y1="13.65" x2="21.09" y2="17.25" /&gt;
+    &lt;line x1="9.14" y1="10.35" x2="2.91" y2="6.75" /&gt;
+    &lt;line x1="9.14" y1="13.65" x2="2.91" y2="17.25" /&gt;
+  &lt;/g&gt;
+&lt;/svg&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Component: Button -->
+        <section id="button" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Button</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Commit the action named on the label. <strong>Limit:</strong> Do not use a button for navigation; links navigate.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview cuis-row">
+              <button type="button" class="cuis-button">Primary Action</button>
+              <button type="button" class="cuis-button cuis-button-quiet">Quiet / Cancel</button>
+              <button type="button" class="cuis-button cuis-button-icon" aria-label="Settings">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke-width="2" stroke="currentColor" fill="none" aria-hidden="true"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+              <button type="button" class="cuis-button" disabled>Disabled</button>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-button">Copy</button>
+              </div>
+              <pre id="code-button"><code>&lt;button type="button" class="cuis-button"&gt;Primary Action&lt;/button&gt;
+&lt;button type="button" class="cuis-button cuis-button-quiet"&gt;Quiet / Cancel&lt;/button&gt;
+&lt;button type="button" class="cuis-button cuis-button-icon" aria-label="Settings"&gt;
+  &lt;svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none"&gt;...&lt;/svg&gt;
+&lt;/button&gt;
+&lt;button type="button" class="cuis-button" disabled&gt;Disabled&lt;/button&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. Component: Input & Field -->
+        <section id="input" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Input &amp; Field</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Collect a single line of text. <strong>Limit:</strong> Do not use an input for selecting among known discrete choices; use tabs or a select.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview cuis-stack-tight" style="max-width: 480px;">
+              <div class="cuis-field">
+                <label class="cuis-label" for="cluster-name">Cluster Name</label>
+                <input id="cluster-name" class="cuis-input" type="text" placeholder="e.g. us-east-production-01">
+                <span class="cuis-label cuis-measure">Alphanumeric characters and hyphens only.</span>
+              </div>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-input">Copy</button>
+              </div>
+              <pre id="code-input"><code>&lt;div class="cuis-field"&gt;
+  &lt;label class="cuis-label" for="cluster-name"&gt;Cluster Name&lt;/label&gt;
+  &lt;input id="cluster-name" class="cuis-input" type="text" placeholder="e.g. us-east-production-01"&gt;
+  &lt;span class="cuis-label cuis-measure"&gt;Alphanumeric characters and hyphens only.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11. Component: Select -->
+        <section id="select" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Select</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Pick one value from an enumerated set of options.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview cuis-stack-tight" style="max-width: 480px;">
+              <div class="cuis-control">
+                <label class="cuis-label" for="region-select">Deployment Region</label>
+                <select id="region-select" class="cuis-select">
+                  <option value="us-east">US East (N. Virginia)</option>
+                  <option value="us-west">US West (Oregon)</option>
+                  <option value="eu-west">EU West (Ireland)</option>
+                  <option value="ap-southeast">AP Southeast (Singapore)</option>
+                </select>
+              </div>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-select">Copy</button>
+              </div>
+              <pre id="code-select"><code>&lt;div class="cuis-control"&gt;
+  &lt;label class="cuis-label" for="region-select"&gt;Deployment Region&lt;/label&gt;
+  &lt;select id="region-select" class="cuis-select"&gt;
+    &lt;option value="us-east"&gt;US East (N. Virginia)&lt;/option&gt;
+    &lt;option value="us-west"&gt;US West (Oregon)&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 12. Component: Card & Surface -->
+        <section id="card" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Card &amp; Surface</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Group a title and related content on a raised surface with calibrated elevation. <strong>Limit:</strong> Never nest cards inside cards.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview" style="max-width: 480px;">
+              <article class="cuis-card cuis-stack-tight">
+                <div class="cuis-spread">
+                  <h3 class="cuis-card-title">Compute Cluster Alpha</h3>
+                  <span class="cuis-chip cuis-chip-ok">Operational</span>
+                </div>
+                <p class="cuis-body">Dedicated high-memory compute pool executing continuous background processing pipelines.</p>
+                <div class="cuis-spread">
+                  <span class="cuis-label">Utilization</span>
+                  <span class="cuis-label">74%</span>
+                </div>
+                <div class="cuis-bar"><span data-series="1" style="width: 74%"></span></div>
+              </article>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-card">Copy</button>
+              </div>
+              <pre id="code-card"><code>&lt;article class="cuis-card cuis-stack-tight"&gt;
+  &lt;div class="cuis-spread"&gt;
+    &lt;h3 class="cuis-card-title"&gt;Compute Cluster Alpha&lt;/h3&gt;
+    &lt;span class="cuis-chip cuis-chip-ok"&gt;Operational&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;p class="cuis-body"&gt;Dedicated high-memory compute pool executing continuous pipelines.&lt;/p&gt;
+  &lt;div class="cuis-bar"&gt;&lt;span data-series="1" style="width: 74%"&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/article&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 13. Component: KPI & Metrics Grid -->
+        <section id="kpi" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">KPI &amp; Metrics Tiles</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Display quantitative high-level indicators with tabular numerals and contextual trend status.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview">
+              <div class="cuis-kpis">
+                <div class="cuis-kpi cuis-card cuis-stack-tight">
+                  <span class="cuis-kicker">Active Workflows</span>
+                  <p class="cuis-metric">1,482</p>
+                  <p class="cuis-label"><span class="cuis-chip cuis-chip-ok">+12.4%</span> vs prior cycle</p>
+                </div>
+                <div class="cuis-kpi cuis-card cuis-stack-tight">
+                  <span class="cuis-kicker">P99 Latency</span>
+                  <p class="cuis-metric">18<span style="font-size: var(--cuis-card-title-size); font-weight: 500;">ms</span></p>
+                  <p class="cuis-label">Across 4 global regions</p>
+                </div>
+                <div class="cuis-kpi cuis-card cuis-stack-tight">
+                  <span class="cuis-kicker">Throughput Rate</span>
+                  <p class="cuis-metric">99.98%</p>
+                  <p class="cuis-label">Zero dropped events</p>
+                </div>
+              </div>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-kpi">Copy</button>
+              </div>
+              <pre id="code-kpi"><code>&lt;div class="cuis-kpis"&gt;
+  &lt;div class="cuis-kpi cuis-card cuis-stack-tight"&gt;
+    &lt;span class="cuis-kicker"&gt;Active Workflows&lt;/span&gt;
+    &lt;p class="cuis-metric"&gt;1,482&lt;/p&gt;
+    &lt;p class="cuis-label"&gt;&lt;span class="cuis-chip cuis-chip-ok"&gt;+12.4%&lt;/span&gt; vs prior cycle&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 14. Component: Table -->
+        <section id="table" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Table</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Compare homogeneous rows sharing identical column dimensions. Text aligns left; numbers align right in tabular figures (<code>.cuis-num</code>). <strong>Limit:</strong> Do not rebuild tables with divs.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview">
+              <div class="cuis-table-scroll">
+                <table class="cuis-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Service Endpoint</th>
+                      <th scope="col">Cluster Region</th>
+                      <th scope="col">Status</th>
+                      <th class="cuis-num" scope="col">Replicas</th>
+                      <th class="cuis-num" scope="col">Avg Latency</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>api.auth-gateway</code></td>
+                      <td>us-east-1</td>
+                      <td><span class="cuis-chip cuis-chip-ok">Ready</span></td>
+                      <td class="cuis-num">12</td>
+                      <td class="cuis-num">14 ms</td>
+                    </tr>
+                    <tr>
+                      <td><code>worker.telemetry-ingest</code></td>
+                      <td>us-east-1</td>
+                      <td><span class="cuis-chip cuis-chip-ok">Ready</span></td>
+                      <td class="cuis-num">24</td>
+                      <td class="cuis-num">22 ms</td>
+                    </tr>
+                    <tr>
+                      <td><code>indexer.document-search</code></td>
+                      <td>eu-west-1</td>
+                      <td><span class="cuis-chip cuis-chip-warn">Degraded</span></td>
+                      <td class="cuis-num">8</td>
+                      <td class="cuis-num">148 ms</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-table">Copy</button>
+              </div>
+              <pre id="code-table"><code>&lt;div class="cuis-table-scroll"&gt;
+  &lt;table class="cuis-table"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th scope="col"&gt;Service Endpoint&lt;/th&gt;
+        &lt;th scope="col"&gt;Status&lt;/th&gt;
+        &lt;th class="cuis-num" scope="col"&gt;Replicas&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;api.auth-gateway&lt;/td&gt;
+        &lt;td&gt;&lt;span class="cuis-chip cuis-chip-ok"&gt;Ready&lt;/span&gt;&lt;/td&gt;
+        &lt;td class="cuis-num"&gt;12&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 15. Component: Tabs -->
+        <section id="tabs" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Tabs</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Switch among alternate peer views in the same section without navigation. <strong>Limit:</strong> Do not use tabs to trigger page navigation.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview">
+              <div class="cuis-tabs">
+                <div role="tablist" aria-label="Workstream Views">
+                  <button type="button" role="tab" id="demo-tab-1" aria-controls="demo-panel-1" aria-selected="true">Overview</button>
+                  <button type="button" role="tab" id="demo-tab-2" aria-controls="demo-panel-2" aria-selected="false" tabindex="-1">Replication Settings</button>
+                  <button type="button" role="tab" id="demo-tab-3" aria-controls="demo-panel-3" aria-selected="false" tabindex="-1">Audit History</button>
+                </div>
+                <div role="tabpanel" id="demo-panel-1" aria-labelledby="demo-tab-1">
+                  <p class="cuis-body" style="padding-top: 1rem;">Primary deployment summary and health vitals are visible.</p>
+                </div>
+                <div role="tabpanel" id="demo-panel-2" aria-labelledby="demo-tab-2" hidden>
+                  <p class="cuis-body" style="padding-top: 1rem;">Replication factors, backup intervals, and peer target endpoints.</p>
+                </div>
+                <div role="tabpanel" id="demo-panel-3" aria-labelledby="demo-tab-3" hidden>
+                  <p class="cuis-body" style="padding-top: 1rem;">Immutable chronological audit trail logs.</p>
+                </div>
+              </div>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-tabs">Copy</button>
+              </div>
+              <pre id="code-tabs"><code>&lt;div class="cuis-tabs"&gt;
+  &lt;div role="tablist" aria-label="Views"&gt;
+    &lt;button type="button" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true"&gt;Overview&lt;/button&gt;
+    &lt;button type="button" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1"&gt;Settings&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div role="tabpanel" id="panel-1" aria-labelledby="tab-1"&gt;Panel 1 content&lt;/div&gt;
+  &lt;div role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden&gt;Panel 2 content&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 16. Component: Dialog & Modal -->
+        <section id="dialog" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Dialog (Modal)</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Interrupt the user flow to request a decision that blocks the page. Implemented with native HTML <code>&lt;dialog&gt;</code> and backdrop dismiss.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview">
+              <button type="button" class="cuis-button" data-cuis-open="demo-modal">Open Modal Dialog</button>
+
+              <dialog class="cuis-dialog" id="demo-modal" aria-labelledby="modal-title">
+                <div class="cuis-stack-tight">
+                  <h3 class="cuis-card-title" id="modal-title">Promote Release to Production?</h3>
+                  <p class="cuis-body">This will route 100% of incoming live gateway traffic to container build #4928. This action can be rolled back.</p>
+                  <div class="cuis-row" style="margin-top: 1rem;">
+                    <button type="button" class="cuis-button" data-cuis-close>Confirm Promotion</button>
+                    <button type="button" class="cuis-button cuis-button-quiet" data-cuis-close>Cancel</button>
+                  </div>
+                </div>
+              </dialog>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-dialog">Copy</button>
+              </div>
+              <pre id="code-dialog"><code>&lt;button type="button" class="cuis-button" data-cuis-open="my-modal"&gt;Open Dialog&lt;/button&gt;
+
+&lt;dialog class="cuis-dialog" id="my-modal" aria-labelledby="dialog-title"&gt;
+  &lt;div class="cuis-stack-tight"&gt;
+    &lt;h3 class="cuis-card-title" id="dialog-title"&gt;Confirm Action&lt;/h3&gt;
+    &lt;p class="cuis-body"&gt;Detailed explanation of the decision.&lt;/p&gt;
+    &lt;div class="cuis-row"&gt;
+      &lt;button type="button" class="cuis-button" data-cuis-close&gt;Submit&lt;/button&gt;
+      &lt;button type="button" class="cuis-button cuis-button-quiet" data-cuis-close&gt;Cancel&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 17. Component: Drawer -->
+        <section id="drawer" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Drawer (Side Sheet)</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Reveal complementary inspection details, filters, or editing tools beside the primary page canvas.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview">
+              <button type="button" class="cuis-button cuis-button-quiet" data-cuis-open="demo-drawer">Open Side Drawer</button>
+
+              <dialog class="cuis-drawer" id="demo-drawer" aria-labelledby="drawer-heading">
+                <div class="cuis-stack-tight">
+                  <h3 class="cuis-card-title" id="drawer-heading">Node Telemetry Inspector</h3>
+                  <p class="cuis-body">Detailed execution metrics for worker node pool <code>i-0482ab39</code>.</p>
+                  <div class="cuis-kpis" style="grid-template-columns: 1fr;">
+                    <div class="cuis-kpi cuis-card cuis-stack-tight">
+                      <span class="cuis-kicker">Memory Allocation</span>
+                      <p class="cuis-metric">14.2 GB</p>
+                    </div>
+                  </div>
+                  <button type="button" class="cuis-button cuis-button-quiet" data-cuis-close style="margin-top: 1rem;">Close Inspector</button>
+                </div>
+              </dialog>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-drawer">Copy</button>
+              </div>
+              <pre id="code-drawer"><code>&lt;button type="button" class="cuis-button" data-cuis-open="my-drawer"&gt;Open Drawer&lt;/button&gt;
+
+&lt;dialog class="cuis-drawer" id="my-drawer" aria-labelledby="drawer-title"&gt;
+  &lt;div class="cuis-stack-tight"&gt;
+    &lt;h3 class="cuis-card-title" id="drawer-title"&gt;Inspector&lt;/h3&gt;
+    &lt;p class="cuis-body"&gt;Supporting copy and controls.&lt;/p&gt;
+    &lt;button type="button" class="cuis-button cuis-button-quiet" data-cuis-close&gt;Close&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 18. Component: Chip -->
+        <section id="chip" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Chip</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Name a status or categorical classification. <strong>Limit:</strong> Chips are never buttons or clickable submit actions.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview cuis-stack-tight">
+              <div class="cuis-row">
+                <span class="cuis-chip">Neutral</span>
+                <span class="cuis-chip cuis-chip-info">Info Tone</span>
+                <span class="cuis-chip cuis-chip-ok">Ok Status</span>
+                <span class="cuis-chip cuis-chip-warn">Warning</span>
+                <span class="cuis-chip cuis-chip-critical">Critical</span>
+              </div>
+              <div class="cuis-row">
+                <span class="cuis-chip" data-series="1">Series 1</span>
+                <span class="cuis-chip" data-series="2">Series 2</span>
+                <span class="cuis-chip" data-series="3">Series 3</span>
+                <span class="cuis-chip cuis-chip-mark" title="Fixed status mark">MK</span>
+                <span class="cuis-chip cuis-chip-action">Action Pill</span>
+              </div>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-chip">Copy</button>
+              </div>
+              <pre id="code-chip"><code>&lt;!-- Status Chips --&gt;
+&lt;span class="cuis-chip"&gt;Neutral&lt;/span&gt;
+&lt;span class="cuis-chip cuis-chip-info"&gt;Info Tone&lt;/span&gt;
+&lt;span class="cuis-chip cuis-chip-ok"&gt;Ok Status&lt;/span&gt;
+&lt;span class="cuis-chip cuis-chip-warn"&gt;Warning&lt;/span&gt;
+&lt;span class="cuis-chip cuis-chip-critical"&gt;Critical&lt;/span&gt;
+
+&lt;!-- Categorical Series &amp; Special Chips --&gt;
+&lt;span class="cuis-chip" data-series="1"&gt;Series 1&lt;/span&gt;
+&lt;span class="cuis-chip" data-series="2"&gt;Series 2&lt;/span&gt;
+&lt;span class="cuis-chip cuis-chip-mark" title="Fixed status mark"&gt;MK&lt;/span&gt;
+&lt;span class="cuis-chip cuis-chip-action"&gt;Action Pill&lt;/span&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 19. Component: Alert -->
+        <section id="alert" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Alert</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Announce persistent system status or conditions across the canvas. <strong>Limit:</strong> Do not use alerts for blocking decisions; use a dialog.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview cuis-stack-tight">
+              <p class="cuis-alert" role="status">Scheduled infrastructure maintenance is planned for Sunday at 02:00 UTC.</p>
+              <p class="cuis-alert cuis-alert-info" role="status">Configuration cache refreshed from primary configuration repository.</p>
+              <p class="cuis-alert cuis-alert-ok" role="status">All cluster worker nodes are healthy and connected.</p>
+              <p class="cuis-alert cuis-alert-warn" role="status">High memory utilization detected on data ingestion pipeline.</p>
+              <p class="cuis-alert cuis-alert-critical" role="status">Connection to database failover replica timed out.</p>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-alert">Copy</button>
+              </div>
+              <pre id="code-alert"><code>&lt;p class="cuis-alert" role="status"&gt;Neutral announcement message.&lt;/p&gt;
+&lt;p class="cuis-alert cuis-alert-info" role="status"&gt;Informational notice.&lt;/p&gt;
+&lt;p class="cuis-alert cuis-alert-ok" role="status"&gt;Operation completed successfully.&lt;/p&gt;
+&lt;p class="cuis-alert cuis-alert-warn" role="status"&gt;Warning: system capacity high.&lt;/p&gt;
+&lt;p class="cuis-alert cuis-alert-critical" role="status"&gt;Critical error occurred.&lt;/p&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 20. Component: Capacity Bar -->
+        <section id="bar" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Capacity &amp; Share Bar</h2>
+            <p class="cuis-body"><strong>Purpose:</strong> Visualize proportional progress, allocation, or quota thresholds cleanly with series tokens.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview cuis-stack-tight" style="max-width: 520px;">
+              <div class="cuis-spread">
+                <span class="cuis-label">Series 1 Allocation</span>
+                <span class="cuis-label cuis-num">65%</span>
+              </div>
+              <div class="cuis-bar" aria-hidden="true"><span data-series="1" style="width: 65%"></span></div>
+
+              <div class="cuis-spread" style="margin-top: 0.5rem;">
+                <span class="cuis-label">Series 2 Allocation</span>
+                <span class="cuis-label cuis-num">40%</span>
+              </div>
+              <div class="cuis-bar" aria-hidden="true"><span data-series="2" style="width: 40%"></span></div>
+
+              <div class="cuis-spread" style="margin-top: 0.5rem;">
+                <span class="cuis-label">Neutral Share</span>
+                <span class="cuis-label cuis-num">80%</span>
+              </div>
+              <div class="cuis-bar" aria-hidden="true"><span data-series="neutral" style="width: 80%"></span></div>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-bar">Copy</button>
+              </div>
+              <pre id="code-bar"><code>&lt;div class="cuis-spread"&gt;
+  &lt;span class="cuis-label"&gt;Category Share&lt;/span&gt;
+  &lt;span class="cuis-label cuis-num"&gt;65%&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="cuis-bar" aria-hidden="true"&gt;
+  &lt;span data-series="1" style="width: 65%"&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 21. Component: Layout Primitives -->
+        <section id="layout" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Components</span>
+            <h2 class="cuis-section-title">Layout Primitives</h2>
+            <p class="cuis-body">Deterministic flex and grid primitives eliminating one-off CSS margins and inline layout styles.</p>
+          </div>
+
+          <div class="cuis-table-scroll">
+            <table class="cuis-table">
+              <thead>
+                <tr>
+                  <th scope="col">Primitive</th>
+                  <th scope="col">Behavior</th>
+                  <th scope="col">Standard Use Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.cuis-stack</code></td>
+                  <td>Vertical column layout with <code>--cuis-stack</code> spacing.</td>
+                  <td>Separating page sections and cards.</td>
+                </tr>
+                <tr>
+                  <td><code>.cuis-stack-tight</code></td>
+                  <td>Vertical column layout with <code>--cuis-stack-tight</code> spacing.</td>
+                  <td>Card interiors, forms, label-value pairs.</td>
+                </tr>
+                <tr>
+                  <td><code>.cuis-row</code></td>
+                  <td>Horizontal flex row with wrapping and tight gap.</td>
+                  <td>Button bars, chip lists, filter pills.</td>
+                </tr>
+                <tr>
+                  <td><code>.cuis-spread</code></td>
+                  <td>Flex row with <code>justify-content: space-between</code>.</td>
+                  <td>Card headers, quota bars with percentage labels.</td>
+                </tr>
+                <tr>
+                  <td><code>.cuis-cluster</code></td>
+                  <td>Inline flex group with tight horizontal gap.</td>
+                  <td>Icon + label pairs, badge clusters.</td>
+                </tr>
+                <tr>
+                  <td><code>.cuis-pair</code></td>
+                  <td>Label-value metadata row.</td>
+                  <td>Configuration readouts, properties list.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 22. Pattern: App Shell -->
+        <section id="shell" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Patterns</span>
+            <h2 class="cuis-section-title">Pattern: App Shell</h2>
+            <p class="cuis-body">Unified application chrome featuring brand identity, segmented view navigation with SVG icons and counts, and action utilities.</p>
+          </div>
+
+          <div class="cuis-card cuis-stack">
+            <div class="cuis-app-header">
+              <span class="cuis-card-title">Telemetry App</span>
+              <div class="cuis-views" role="group" aria-label="Views">
+                <button type="button" aria-current="page">
+                  <svg viewBox="0 0 24 24" width="18" height="18" stroke-width="2" stroke="currentColor" fill="none" aria-hidden="true"><path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"/><path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2"/></svg>
+                  Overview
+                </button>
+                <button type="button">
+                  <svg viewBox="0 0 24 24" width="18" height="18" stroke-width="2" stroke="currentColor" fill="none" aria-hidden="true"><path d="M3 12h4l3 8l4 -16l3 8h4"/></svg>
+                  Live Feeds
+                  <span class="cuis-count">4</span>
+                </button>
+              </div>
+              <div class="cuis-tools">
+                <button type="button" class="cuis-button cuis-button-quiet" style="font-size: var(--cuis-label-size);">Deploy</button>
+              </div>
+            </div>
+            <div class="cuis-split">
+              <div class="cuis-filters">
+                <button type="button" class="cuis-filter" aria-pressed="true">
+                  <span class="cuis-filter-name">All Services</span>
+                  <span class="cuis-label cuis-count">12</span>
+                </button>
+                <button type="button" class="cuis-filter">
+                  <span class="cuis-filter-name"><span class="cuis-swatch" data-series="1" aria-hidden="true"></span>Gateway</span>
+                  <span class="cuis-label cuis-count">4</span>
+                </button>
+              </div>
+              <div class="cuis-stack-tight">
+                <div class="cuis-spread">
+                  <span class="cuis-chip"><span class="cuis-swatch" data-series="1" aria-hidden="true"></span>Active Capacity</span>
+                  <span class="cuis-label cuis-count">72%</span>
+                </div>
+                <div class="cuis-bar" aria-hidden="true"><span data-series="1" style="width: 72%"></span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 23. Pattern: Nav-Detail Rail -->
+        <section id="rail" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Patterns</span>
+            <h2 class="cuis-section-title">Pattern: Nav-Detail Rail</h2>
+            <p class="cuis-body">Sticky navigation and resource browser with interior scrolling (<code>.cuis-roster</code>), active indicator, and filter rail switches.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview">
+              <div class="cuis-rail" style="max-width: 320px; border: 1px solid var(--cuis-border-subtle); border-radius: 0.75rem; padding: 1rem;">
+                <div class="cuis-spread" style="margin-bottom: 0.75rem;">
+                  <span class="cuis-card-title">Cluster Nodes</span>
+                  <span class="cuis-label">4 Online</span>
+                </div>
+                <div class="cuis-roster" style="display: flex; flex-direction: column; gap: 0.25rem;">
+                  <button type="button" aria-current="true" style="text-align: left; padding: 0.5rem; background: var(--cuis-surface-canvas); border: 1px solid var(--cuis-action-primary-background); border-radius: 0.5rem; cursor: pointer;">
+                    <div class="cuis-spread">
+                      <span class="cuis-body" style="font-weight: 600;">node-alpha-01</span>
+                      <span class="cuis-chip cuis-chip-ok" style="font-size: var(--cuis-label-size);">Leader</span>
+                    </div>
+                  </button>
+                  <button type="button" style="text-align: left; padding: 0.5rem; background: transparent; border: 1px solid transparent; border-radius: 0.5rem; cursor: pointer;">
+                    <div class="cuis-spread">
+                      <span class="cuis-body">node-alpha-02</span>
+                      <span class="cuis-chip" style="font-size: var(--cuis-label-size);">Follower</span>
+                    </div>
+                  </button>
+                  <button type="button" style="text-align: left; padding: 0.5rem; background: transparent; border: 1px solid transparent; border-radius: 0.5rem; cursor: pointer;">
+                    <div class="cuis-spread">
+                      <span class="cuis-body">node-alpha-03</span>
+                      <span class="cuis-chip" style="font-size: var(--cuis-label-size);">Follower</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">HTML</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-rail">Copy</button>
+              </div>
+              <pre id="code-rail"><code>&lt;div class="cuis-rail"&gt;
+  &lt;h3 class="cuis-card-title"&gt;Rail Roster&lt;/h3&gt;
+  &lt;div class="cuis-roster"&gt;
+    &lt;button type="button" aria-current="true"&gt;Active Item&lt;/button&gt;
+    &lt;button type="button"&gt;Peer Item&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 24. Companion Kits: Data Viz -->
+        <section id="dataviz" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Companion Kits</span>
+            <div class="cuis-spread">
+              <h2 class="cuis-section-title">Core Data Visualization Kit (cdviz)</h2>
+              <span class="cuis-kicker">19 Chart Types</span>
+            </div>
+            <p class="cuis-body">19 zero-dependency, accessible SVG charts seamlessly rendered and themed via CUIS token bridging.</p>
+          </div>
+
+          <div class="cuis-gallery-grid-viz">
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">1. Horizontal Bar (<code>horizontal-bar</code>)</h3>
+                <p class="cuis-label">Proportional category shares comparing operational metrics across geographic regions.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-hbar"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">2. Vertical Bar (<code>vertical-bar</code>)</h3>
+                <p class="cuis-label">Discrete vertical columns with labeled categorical X axis and quantitative Y axis ticks.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-vbar"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">3. Stacked Bar (<code>stacked-bar</code>)</h3>
+                <p class="cuis-label">Composition breakdown across quarterly periods with sequential series tokens.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-stacked"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">4. Grouped Bar - Vertical (<code>grouped-bar</code>)</h3>
+                <p class="cuis-label">Multi-series side-by-side vertical cluster comparison.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-gbar-vert"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">5. Grouped Bar - Horizontal (<code>grouped-bar</code>)</h3>
+                <p class="cuis-label">Multi-series grouped horizontal bars comparing targets against actual delivery.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-gbar-horiz"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">6. Donut Chart (<code>donut</code>)</h3>
+                <p class="cuis-label">Proportional part-to-whole allocation with centered summary metric callout.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-donut"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">7. Pie Chart (<code>pie</code>)</h3>
+                <p class="cuis-label">Solid radial partition comparing resource allocations.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-pie"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">8. Meter Bar (<code>meter</code>)</h3>
+                <p class="cuis-label">Linear single-metric progress against an operational threshold.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-meter"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">9. Radial Gauge (<code>gauge</code>)</h3>
+                <p class="cuis-label">Semi-circular speedometer-style gauge dial with threshold markers.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-gauge"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">10. Bullet Graph - Horizontal (<code>bullet</code>)</h3>
+                <p class="cuis-label">Horizontal qualitative ranges with performance bar and target marker line.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-bullet-horiz"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">11. Bullet Graph - Vertical (<code>bullet</code>)</h3>
+                <p class="cuis-label">Vertical qualitative ranges comparing quota vs target.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-bullet-vert"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">12. Floating Bar / Range (<code>floating-bar</code>)</h3>
+                <p class="cuis-label">Gantt-style interval spans detailing task start, end, and duration.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-floating"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">13. Line Chart (<code>line</code>)</h3>
+                <p class="cuis-label">Continuous milestone progression with connected data points.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-line"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">14. Area Chart (<code>area</code>)</h3>
+                <p class="cuis-label">Volume progression with translucent gradient fill beneath trendline.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-area"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">15. Stacked Area Chart (<code>stacked-area</code>)</h3>
+                <p class="cuis-label">Multi-series cumulative area ribbons detailing volume composition over time.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-stacked-area"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">16. Scatter Plot (<code>scatter</code>)</h3>
+                <p class="cuis-label">Two-dimensional correlation plot with dual continuous axes and series groupings.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-scatter"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">17. Sparkline (<code>sparkline</code>)</h3>
+                <p class="cuis-label">Streamlined, borderless trend indicator designed for KPI summary cards.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-sparkline"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">18. Proportional Meter (<code>proportional-meter</code>)</h3>
+                <p class="cuis-label">Multi-segment horizontal capacity bar with legend chips showing resource allocation.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-prop-meter"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-viz">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">19. Deterministic Empty State (<code>empty</code>)</h3>
+                <p class="cuis-label">Deterministic fallback rendering when data array is missing or empty.</p>
+              </div>
+              <div class="cuis-chart-container" id="chart-empty"></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 25. Companion Kits: Diagrams -->
+        <section id="diagrams" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Companion Kits</span>
+            <div class="cuis-spread">
+              <h2 class="cuis-section-title">Core Diagramming Kit (cdiag)</h2>
+              <span class="cuis-kicker">11 Diagram Types</span>
+            </div>
+            <p class="cuis-body">11 relational and structural SVG diagram renderers with accessible nested outline navigation.</p>
+          </div>
+
+          <div class="cuis-gallery-stack-diag">
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">1. Platform Mind Map (<code>mindmap</code>)</h3>
+                <p class="cuis-label">Radial contextual relationship mapping around a core central topic.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-mindmap"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">2. System Context Ecosystem Map (<code>context-map</code>)</h3>
+                <p class="cuis-label">Hub-and-spoke boundary mapping with categorized upstream, downstream, and external services.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-context-map"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">3. Organization Taxonomy Tree (<code>tree-horizontal</code>)</h3>
+                <p class="cuis-label">Left-to-right drill-down classification taxonomy from root to leaf teams.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-tree-horizontal"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">4. Governance Hierarchy Tree (<code>tree-vertical</code>)</h3>
+                <p class="cuis-label">Top-down governance structure with clean stepped orthogonal routing.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-tree-vertical"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">5. Release Verification Pipeline (<code>flowchart</code>)</h3>
+                <p class="cuis-label">Sequential and branching execution pipeline with terminals, steps, and decision gates.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-flowchart"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">6. Identity &amp; Workspace Schema (<code>entity-relationship</code>)</h3>
+                <p class="cuis-label">Domain entities with primary/foreign keys and cardinality relationship connectors.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-entity-relationship"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">7. Clean Architecture Tiers (<code>layered-architecture</code>)</h3>
+                <p class="cuis-label">Horizontal architecture tiers detailing components, responsibilities, and boundary flows.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-layered-architecture"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">8. OAuth 2.0 Authorization Flow (<code>sequence</code>)</h3>
+                <p class="cuis-label">Synchronous and asynchronous message exchanges along participant vertical lifelines.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-sequence"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">9. Task Lifecycle State Machine (<code>state-machine</code>)</h3>
+                <p class="cuis-label">Discrete state transitions with triggers, guard conditions, and terminal end states.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-state-machine"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">10. Prioritization Impact vs. Effort Matrix (<code>matrix</code>)</h3>
+                <p class="cuis-label">2x2 strategic relationship matrix mapping initiatives across effort and impact quadrants.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-matrix"></div>
+            </article>
+
+            <article class="cuis-card cuis-gallery-card-diag">
+              <div class="cuis-stack-tight cuis-card-header">
+                <h3 class="cuis-card-title">11. Platform Evolution Roadmap (<code>timeline</code>)</h3>
+                <p class="cuis-label">Horizontal chronological spine with milestone checkpoints, stems, and optional phase bands.</p>
+              </div>
+              <div class="cuis-diag-container" id="mount-timeline"></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 26. Token Bridging Architecture -->
+        <section id="bridging" class="cuis-stack">
+          <div class="cuis-stack-tight">
+            <span class="cuis-kicker">Companion Kits</span>
+            <h2 class="cuis-section-title">Token Bridging Architecture</h2>
+            <p class="cuis-body">How CUIS hosts connect to zero-dependency companion kits without foreign token pollution.</p>
+          </div>
+
+          <div class="cuis-specimen">
+            <div class="cuis-specimen-preview cuis-stack-tight">
+              <p class="cuis-body">Neither <code>cdviz</code> nor <code>cdiag</code> contain references to <code>--cuis-*</code>. The host maps them by loading <code>bridges/kits.css</code> and setting <code>data-theme</code> from <code>data-cuis-appearance</code>:</p>
+            </div>
+            <div class="cuis-specimen-code">
+              <div class="cuis-code-header">
+                <span class="cuis-code-lang">CSS</span>
+                <button type="button" class="cuis-button cuis-button-quiet cuis-copy-btn" data-copy-target="code-bridge">Copy</button>
+              </div>
+              <pre id="code-bridge"><code>/* bridges/kits.css: Clean mapping without framework pollution */
+html[data-cuis-appearance="light"],
+html[data-cuis-appearance="dark"] {
+  /* Data Viz Mapping */
+  --cdviz-series-1: var(--cuis-series-1);
+  --cdviz-series-2: var(--cuis-series-2);
+  --cdviz-series-3: var(--cuis-series-3);
+  --cdviz-bg: var(--cuis-surface-raised);
+  --cdviz-surface: var(--cuis-surface-canvas);
+  --cdviz-text: var(--cuis-text-primary);
+  --cdviz-border: var(--cuis-border-subtle);
+
+  /* Diagrams Mapping */
+  --cdiag-series-1: var(--cuis-series-1);
+  --cdiag-series-2: var(--cuis-series-2);
+  --cdiag-bg: var(--cuis-surface-raised);
+  --cdiag-surface: var(--cuis-surface-canvas);
+  --cdiag-text: var(--cuis-text-primary);
+  --cdiag-line: var(--cuis-text-secondary);
+  --cdiag-line-active: var(--cuis-action-primary-background);
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Footer -->
+      <footer id="licenses" class="cuis-footer">
+        <div class="cuis-footer-inner">
+          <div class="cuis-footer-brand-col">
+            <div class="cuis-footer-logo-row">
+              <svg class="cuis-brand-mark" viewBox="0 0 24 24" width="36" height="36" aria-hidden="true">
+                <polygon points="14.86,13.65 12,15.3 9.14,13.65 9.14,10.35 12,8.7 14.86,10.35" fill="currentColor" stroke="none" />
+                <g fill="none" stroke="currentColor" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="16.94,14.85 12,17.7 7.06,14.85 7.06,9.15 12,6.3 16.94,9.15" fill="none" />
+                  <polygon points="19.01,16.05 12,20.1 4.99,16.05 4.99,7.95 12,3.9 19.01,7.95" fill="none" />
+                  <polygon points="21.09,17.25 12,22.5 2.91,17.25 2.91,6.75 12,1.5 21.09,6.75" fill="none" />
+                  <line x1="12" y1="8.7" x2="12" y2="1.5" />
+                  <line x1="12" y1="15.3" x2="12" y2="22.5" />
+                  <line x1="14.86" y1="10.35" x2="21.09" y2="6.75" />
+                  <line x1="14.86" y1="13.65" x2="21.09" y2="17.25" />
+                  <line x1="9.14" y1="10.35" x2="2.91" y2="6.75" />
+                  <line x1="9.14" y1="13.65" x2="2.91" y2="17.25" />
+                </g>
+              </svg>
+              <div>
+                <span class="cuis-footer-title">Core UI System (CUIS)</span>
+              </div>
+            </div>
+            <p class="cuis-body" style="font-size: var(--cuis-body-size); color: var(--cuis-text-secondary); max-width: 44ch; margin: 0;">
+              Zero-dependency design system with a bridge to light-weight charting and diagramming kits. Distributed as an open source resource under permissive licensing.
+            </p>
+            <p class="cuis-label" style="opacity: 0.75; font-size: var(--cuis-label-size); margin-top: 0.35rem; line-height: 1.5;">
+              Code licensed <a href="LICENSE" target="_blank" style="color: inherit; text-decoration: underline;">MIT</a>.
+            </p>
+          </div>
+
+          <div class="cuis-footer-links-grid">
+            <div class="cuis-footer-col">
+              <span class="cuis-footer-heading">Suite Packages</span>
+              <a href="#suite">Overview &amp; Architecture</a>
+              <a href="#about">packages/core (UI system)</a>
+              <a href="#dataviz">packages/viz (19 SVG charts)</a>
+              <a href="#diagrams">packages/diag (11 diagrams)</a>
+              <a href="#bridging">packages/bridge (CSS tokens)</a>
+            </div>
+
+            <div class="cuis-footer-col">
+              <span class="cuis-footer-heading">Foundations</span>
+              <a href="#tokens">Tokens &amp; Theming</a>
+              <a href="#type">Typography Scale</a>
+              <a href="#space">Space &amp; Density</a>
+              <a href="#color">Color &amp; Series</a>
+              <a href="#brand">Brand Mark</a>
+            </div>
+
+            <div class="cuis-footer-col">
+              <span class="cuis-footer-heading">Components</span>
+              <a href="#button">Buttons &amp; Inputs</a>
+              <a href="#kpi">KPI Stat Tiles</a>
+              <a href="#table">Dense Data Tables</a>
+              <a href="#shell">App Shell Primitive</a>
+              <a href="#rail">Nav-Detail Rail</a>
+            </div>
+
+            <div class="cuis-footer-col">
+              <span class="cuis-footer-heading">Ecosystem</span>
+              <a href="https://github.com/robchappell/cuis" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+              <a href="DESIGN.md" target="_blank">Framework Contract</a>
+              <a href="LICENSE" target="_blank">MIT License</a>
+              <a href="cuis-mark.svg" target="_blank" download>Brand Mark (SVG)</a>
+              <a href="#quickstart">Quickstart</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cuis-footer-bottom">
+          <p class="cuis-label" style="margin: 0;">&copy; 2026 Core UI System (CUIS). Licensed under <a href="LICENSE" target="_blank" style="color: inherit; text-decoration: underline;">MIT</a>.</p>
+          <div class="cuis-footer-meta">
+            <span class="cuis-label">Pure CSS &bull; Native Vanilla JS &bull; Scalable Vector SVG</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      function syncTheme() {
+        var app = document.documentElement.getAttribute("data-cuis-appearance") || "light";
+        document.documentElement.setAttribute("data-theme", app);
+      }
+      syncTheme();
+
+      function markCurrentSection() {
+        var id = (location.hash || "#about").slice(1);
+        document.querySelectorAll(".cuis-sidebar nav a").forEach(function (link) {
+          var current = link.getAttribute("href") === "#" + id;
+          if (current) link.setAttribute("aria-current", "page");
+          else link.removeAttribute("aria-current");
+        });
+      }
+      markCurrentSection();
+      window.addEventListener("hashchange", markCurrentSection);
+
+      if (window.MutationObserver) {
+        var observer = new MutationObserver(syncTheme);
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-cuis-appearance"] });
+      }
+
+      // Mobile Drawer Toggle & Dismissal
+      var mobileToggle = document.querySelector(".cuis-mobile-toggle");
+      var mobileClose = document.querySelector(".cuis-mobile-close");
+      var sidebarScrim = document.getElementById("cuis-sidebar-scrim");
+      var sidebarNav = document.getElementById("cuis-sidebar");
+
+      function openMobileNav() {
+        document.body.classList.add("cuis-nav-open");
+        if (mobileToggle) mobileToggle.setAttribute("aria-expanded", "true");
+      }
+
+      function closeMobileNav() {
+        document.body.classList.remove("cuis-nav-open");
+        if (mobileToggle) mobileToggle.setAttribute("aria-expanded", "false");
+      }
+
+      if (mobileToggle) {
+        mobileToggle.addEventListener("click", function () {
+          if (document.body.classList.contains("cuis-nav-open")) closeMobileNav();
+          else openMobileNav();
+        });
+      }
+
+      if (mobileClose) {
+        mobileClose.addEventListener("click", closeMobileNav);
+      }
+
+      if (sidebarScrim) {
+        sidebarScrim.addEventListener("click", closeMobileNav);
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && document.body.classList.contains("cuis-nav-open")) {
+          closeMobileNav();
+        }
+      });
+
+      // Close mobile drawer when any link is clicked
+      if (sidebarNav) {
+        sidebarNav.addEventListener("click", function (e) {
+          if (e.target.closest("a")) {
+            closeMobileNav();
+          }
+        });
+      }
+
+      // Sync select dropdowns between header and mobile drawer
+      document.addEventListener("change", function (e) {
+        var themeSelect = e.target.closest("select[data-cuis-set-theme]");
+        if (themeSelect) {
+          var themeVal = themeSelect.value;
+          document.querySelectorAll("select[data-cuis-set-theme]").forEach(function (s) {
+            if (s !== themeSelect) s.value = themeVal;
+          });
+        }
+        var densitySelect = e.target.closest("select[data-cuis-set-density]");
+        if (densitySelect) {
+          var densityVal = densitySelect.value;
+          document.querySelectorAll("select[data-cuis-set-density]").forEach(function (s) {
+            if (s !== densitySelect) s.value = densityVal;
+          });
+        }
+      });
+
+      // Copy Code Handler
+      document.addEventListener("click", function (event) {
+        var btn = event.target.closest(".cuis-copy-btn");
+        if (!btn) return;
+        var targetId = btn.getAttribute("data-copy-target");
+        var targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+        var text = targetEl.textContent || targetEl.innerText;
+        navigator.clipboard.writeText(text).then(function () {
+          var original = btn.textContent;
+          btn.textContent = "Copied!";
+          setTimeout(function () {
+            btn.textContent = original;
+          }, 2000);
+        }).catch(function (err) {
+          console.error("Clipboard copy failed", err);
+        });
+      });
+
+      // Fixtures for cdviz
+      var vizFixtures = [
+        { file: "horizontal-bar.json", el: "chart-hbar" },
+        { file: "vertical-bar.json", el: "chart-vbar" },
+        { file: "stacked-bar.json", el: "chart-stacked" },
+        { file: "grouped-bar-vertical.json", el: "chart-gbar-vert" },
+        { file: "grouped-bar-horizontal.json", el: "chart-gbar-horiz" },
+        { file: "donut.json", el: "chart-donut" },
+        { file: "pie.json", el: "chart-pie" },
+        { file: "meter.json", el: "chart-meter" },
+        { file: "gauge.json", el: "chart-gauge" },
+        { file: "bullet-horizontal.json", el: "chart-bullet-horiz" },
+        { file: "bullet-vertical.json", el: "chart-bullet-vert" },
+        { file: "floating-bar.json", el: "chart-floating" },
+        { file: "line.json", el: "chart-line" },
+        { file: "area.json", el: "chart-area" },
+        { file: "stacked-area.json", el: "chart-stacked-area" },
+        { file: "scatter.json", el: "chart-scatter" },
+        { file: "sparkline.json", el: "chart-sparkline" },
+        { file: "proportional-meter.json", el: "chart-prop-meter" },
+        { file: "empty.json", el: "chart-empty" }
+      ];
+
+      // Fixtures for cdiag
+      var diagFixtures = [
+        { file: "mindmap.json", el: "mount-mindmap" },
+        { file: "context-map.json", el: "mount-context-map" },
+        { file: "tree-horizontal.json", el: "mount-tree-horizontal" },
+        { file: "tree-vertical.json", el: "mount-tree-vertical" },
+        { file: "flowchart.json", el: "mount-flowchart" },
+        { file: "entity-relationship.json", el: "mount-entity-relationship" },
+        { file: "layered-architecture.json", el: "mount-layered-architecture" },
+        { file: "sequence.json", el: "mount-sequence" },
+        { file: "state-machine.json", el: "mount-state-machine" },
+        { file: "matrix.json", el: "mount-matrix" },
+        { file: "timeline.json", el: "mount-timeline" }
+      ];
+
+      var vizFallback = {"area.json":{"chart":"area","title":"Monthly Network Throughput","description":"Synthetic area chart showing network throughput progression across the last six months.","unit":"Gbps","data":[{"label":"Jan","value":120},{"label":"Feb","value":185},{"label":"Mar","value":240},{"label":"Apr","value":210},{"label":"May","value":310},{"label":"Jun","value":290}]},"bullet-horizontal.json":{"chart":"bullet","orientation":"horizontal","title":"Revenue Performance vs Targets","description":"Synthetic horizontal bullet chart showing actual revenue against target across regions.","target":250,"max":300,"data":[{"label":"North America","value":265,"target":250},{"label":"Europe","value":195,"target":210},{"label":"Asia Pacific","value":140,"target":130}]},"bullet-vertical.json":{"chart":"bullet","orientation":"vertical","title":"Quarterly KPI Achievement","description":"Synthetic vertical bullet chart tracking KPI delivery across key initiatives.","target":85,"max":100,"data":[{"label":"Infra","value":92,"target":85},{"label":"Quality","value":78,"target":85},{"label":"Security","value":88,"target":85}]},"donut.json":{"chart":"donut","title":"Category Allocation Share","description":"Synthetic breakdown of category shares summing to full composition.","data":[{"label":"Category A","value":40},{"label":"Category B","value":25},{"label":"Category C","value":20},{"label":"Category D","value":15}]},"empty.json":{"chart":"horizontal-bar","title":"Empty Dataset State","description":"Deterministic empty state rendered when records are absent.","emptyMessage":"No data available to display","data":[]},"floating-bar.json":{"chart":"floating-bar","title":"Release Roadmap Milestones","description":"Synthetic Gantt-style floating interval chart showing sprint spans for core milestones.","data":[{"label":"Discovery","start":1,"end":4},{"label":"Architecture","start":3,"end":7},{"label":"Core Engine","start":6,"end":12},{"label":"UI & Viz","start":9,"end":14},{"label":"Integration","start":12,"end":16}]},"gauge.json":{"chart":"gauge","title":"CPU Utilization","description":"Synthetic radial gauge indicating cluster CPU load percent.","max":100,"data":[{"label":"CPU Load","value":68}]},"grouped-bar-horizontal.json":{"chart":"grouped-bar","orientation":"horizontal","title":"Product Adoption by Market","description":"Synthetic comparison of Enterprise and Self-Serve adoption across markets.","series":["Enterprise","Self-Serve"],"data":[{"label":"Americas","values":[340,520]},{"label":"EMEA","values":[280,410]},{"label":"APAC","values":[190,310]}]},"grouped-bar-vertical.json":{"chart":"grouped-bar","orientation":"vertical","title":"Team Output by Quarter","description":"Synthetic comparison of Alpha and Beta teams across four quarters.","series":["Alpha Team","Beta Team"],"xAxisLabel":"Quarter","yAxisLabel":"Story Points","data":[{"label":"Q1","values":[45,60]},{"label":"Q2","values":[55,70]},{"label":"Q3","values":[65,60]},{"label":"Q4","values":[80,75]}]},"horizontal-bar.json":{"chart":"horizontal-bar","title":"Regional Distribution","description":"Synthetic distribution of operational metrics across geographic regions.","data":[{"label":"Region North","value":450},{"label":"Region South","value":320},{"label":"Region East","value":580},{"label":"Region West","value":410},{"label":"Central","value":290}]},"line.json":{"chart":"line","title":"Throughput Velocity Trend","description":"Synthetic time-series progression over sequential intervals.","data":[{"label":"M1","value":110},{"label":"M2","value":140},{"label":"M3","value":135},{"label":"M4","value":175},{"label":"M5","value":160},{"label":"M6","value":210}]},"meter.json":{"chart":"meter","title":"Storage Capacity Used","description":"Synthetic linear meter showing allocated storage against cluster maximum.","max":1000,"data":[{"label":"Allocated GiB","value":742}]},"pie.json":{"chart":"pie","title":"Operating Budget Allocation","description":"Synthetic distribution of operating budget across department categories.","data":[{"label":"Engineering","value":42},{"label":"Product","value":24},{"label":"Design","value":18},{"label":"Operations","value":16}]},"proportional-meter.json":{"chart":"proportional-meter","title":"Disk Space Allocation","description":"Synthetic proportional meter chart displaying storage capacity utilization across system and user categories.","total":512,"unit":"GB","data":[{"label":"System & OS","value":64},{"label":"Applications","value":142},{"label":"Developer Tools","value":98},{"label":"User Documents","value":78},{"label":"Free Space","value":130}]},"scatter.json":{"chart":"scatter","title":"Latency vs. Throughput Correlation","description":"Synthetic scatter plot exploring correlation between throughput and P99 latency across distributed microservices.","xAxisLabel":"Throughput (req/s)","yAxisLabel":"P99 Latency (ms)","data":[{"label":"Auth Service","x":1200,"y":14.2},{"label":"Billing Service","x":450,"y":38.5},{"label":"Search Service","x":2800,"y":82.0},{"label":"Catalog Service","x":1900,"y":24.1},{"label":"Notification Service","x":800,"y":12.0},{"label":"Analytics Engine","x":3200,"y":110.5}]},"sparkline.json":{"chart":"sparkline","title":"Weekly Error Rate Trend","description":"Synthetic compact sparkline area chart displaying daily error rate trend over seven days.","unit":"errors/min","data":[{"label":"Mon","value":12},{"label":"Tue","value":18},{"label":"Wed","value":15},{"label":"Thu","value":24},{"label":"Fri","value":22},{"label":"Sat","value":9},{"label":"Sun","value":11}]},"stacked-area.json":{"chart":"stacked-area","title":"Quarterly Compute Allocation by Tier","description":"Synthetic stacked area chart comparing proportional compute core contributions across tiers.","series":["Standard","High-Mem","GPU Accelerated"],"unit":"vCPU","data":[{"label":"Q1","values":[120,80,40]},{"label":"Q2","values":[140,95,60]},{"label":"Q3","values":[160,110,85]},{"label":"Q4","values":[190,130,110]}]},"stacked-bar.json":{"chart":"stacked-bar","title":"Quarterly Volume by Segment","description":"Synthetic breakdown of quarterly volume into segment components.","series":["Series Alpha","Series Beta","Series Gamma"],"data":[{"label":"Q1","values":[120,80,50]},{"label":"Q2","values":[140,95,60]},{"label":"Q3","values":[160,110,75]},{"label":"Q4","values":[180,125,90]}]},"vertical-bar.json":{"chart":"vertical-bar","title":"Quarterly Revenue Performance","description":"Synthetic quarterly revenue in millions.","xAxisLabel":"Fiscal Quarter","yAxisLabel":"Revenue ($M)","data":[{"label":"Q1","value":125},{"label":"Q2","value":180},{"label":"Q3","value":240},{"label":"Q4","value":310}]}};
+      var diagFallback = {"context-map.json":{"type":"context-map","title":"Order Management System Context","description":"System context boundary map showing hub-and-spoke integrations, client touchpoints, and external service protocols.","width":860,"height":480,"nodes":[{"id":"core","label":"Order Management Core","role":"core","series":1},{"id":"client","label":"Customer Portal","role":"client","series":2},{"id":"payment","label":"Payment Gateway","role":"external","series":3},{"id":"inventory","label":"Inventory Service","role":"upstream","series":4},{"id":"notify","label":"Notification Bus","role":"downstream","series":5},{"id":"auth","label":"Identity Provider","role":"upstream","series":2}],"edges":[{"source":"client","target":"core","label":"GraphQL / HTTPS"},{"source":"core","target":"payment","label":"PCI REST API"},{"source":"core","target":"inventory","label":"gRPC Sync"},{"source":"core","target":"notify","label":"Kafka Events"},{"source":"auth","target":"core","label":"OIDC Tokens"}]},"entity-relationship.json":{"type":"entity-relationship","title":"Tenant Domain Schema (ERD)","description":"Synthetic entity relationship diagram: a central tenant with accounts, projects, billing, and audit records.","width":980,"height":720,"nodes":[{"id":"tenant","label":"Tenant","role":"core","series":1,"attributes":["PK id : uuid","name : string","tier : string"]},{"id":"account","label":"Account","series":2,"attributes":["PK id : uuid","FK tenant_id : uuid","email : string","role : string"]},{"id":"project","label":"Project","series":3,"attributes":["PK id : uuid","FK tenant_id : uuid","name : string","status : string"]},{"id":"invoice","label":"Invoice","series":4,"attributes":["PK id : uuid","FK account_id : uuid","amount : integer","currency : string"]},{"id":"subscription","label":"Subscription","series":5,"attributes":["PK id : uuid","FK account_id : uuid","plan : string","status : string"]},{"id":"audit","label":"AuditEvent","series":1,"attributes":["PK id : uuid","FK tenant_id : uuid","action : string","at : datetime"]}],"edges":[{"source":"tenant","target":"account","label":"1:N"},{"source":"tenant","target":"project","label":"1:N"},{"source":"account","target":"invoice","label":"1:N"},{"source":"account","target":"subscription","label":"1:1"},{"source":"tenant","target":"audit","label":"1:N"}]},"flowchart.json":{"type":"flowchart","title":"CI/CD Deployment Pipeline","description":"Flowchart diagram representing continuous integration validation stages, quality gates, and automated production deployment.","width":840,"height":360,"nodes":[{"id":"start","label":"PR Created","role":"terminal","series":1},{"id":"lint","label":"Lint & Validate","role":"process","series":2},{"id":"test","label":"Run Test Suite","role":"process","series":2},{"id":"gate","label":"Tests Pass?","role":"decision","series":3},{"id":"fix","label":"Request Changes","role":"process","series":5},{"id":"deploy","label":"Release to Prod","role":"terminal","series":2}],"edges":[{"source":"start","target":"lint"},{"source":"lint","target":"test"},{"source":"test","target":"gate"},{"source":"gate","target":"deploy","label":"Yes"},{"source":"gate","target":"fix","label":"No"},{"source":"fix","target":"lint","label":"Retry"}]},"layered-architecture.json":{"type":"layered-architecture","title":"Enterprise Platform Layered Architecture","description":"Multi-tier layered system architecture mapping client presentation, API gateway, domain microservices, and storage layers.","width":860,"height":420,"layers":[{"id":"ui","label":"Presentation Layer","nodes":["Web Console","CLI Tool","Mobile Client"]},{"id":"gateway","label":"API & Edge Layer","nodes":["API Gateway","OAuth2 Proxy"]},{"id":"services","label":"Domain Services","nodes":["Catalog Service","Order Engine","Event Dispatcher"]},{"id":"data","label":"Persistence & Cache","nodes":["Primary DB (Postgres)","Redis Cluster","S3 Storage"]}]},"matrix.json":{"type":"matrix","title":"Prioritization Impact vs. Effort Matrix","description":"2x2 strategic relationship matrix mapping initiatives across effort and impact quadrants.","width":840,"height":440,"axes":{"x":"Implementation Effort (Low \u2192 High)","y":"Business Impact (Low \u2192 High)","quadrants":["Quick Wins","Major Projects","Fill-ins","Reconsider"]},"nodes":[{"id":"sso","label":"SSO Integration","quadrant":"q1","series":2},{"id":"lint","label":"Automated Linter","quadrant":"q1","series":2},{"id":"failover","label":"Multi-Region Cloud","quadrant":"q2","series":1},{"id":"redesign","label":"Full UI Overhaul","quadrant":"q2","series":1},{"id":"emojis","label":"Custom Emoji Reactions","quadrant":"q3","series":3},{"id":"manual","label":"Custom Reporting Scripts","quadrant":"q4","series":5}]},"mindmap.json":{"type":"mindmap","title":"Platform Capabilities Mindmap","description":"Multi-quadrant contextual mindmap showing core platform capabilities and integrations radiating from a central topic.","width":880,"height":440,"root":{"id":"cacoo","label":"Cacoo","children":[{"id":"quick-easy","label":"Quick & Easy","series":3,"children":[{"id":"browser","label":"On Web Browser"},{"id":"stencil","label":"Drag & Drop Stencil"},{"id":"template","label":"Select Template"}]},{"id":"collab","label":"Collaboration","series":5,"children":[{"id":"chat","label":"Chat"},{"id":"edit-simul","label":"Edit Simultaneously"},{"id":"comment","label":"Post Comment"}]},{"id":"input","label":"Input","series":2,"children":[{"id":"in-stencil","label":"Stencil"},{"id":"in-template","label":"Template"},{"id":"in-upload","label":"Upload Image or SVG"},{"id":"in-url","label":"Image or Website URL"},{"id":"in-shot","label":"Screen Shot"}]},{"id":"output","label":"Output","series":1,"children":[{"id":"out-png","label":"PNG"},{"id":"out-svg","label":"SVG"},{"id":"out-pdf","label":"PDF"},{"id":"out-ps","label":"PS"}]}]}},"sequence.json":{"type":"sequence","title":"Authentication Protocol Flow","description":"Sequence diagram displaying chronological interaction and message passing between client, gateway, auth service, and database.","width":840,"height":380,"participants":[{"id":"client","label":"Client App"},{"id":"gateway","label":"API Gateway"},{"id":"auth","label":"Auth Service"},{"id":"db","label":"Database"}],"messages":[{"from":"client","to":"gateway","label":"1. POST /auth/login","type":"sync"},{"from":"gateway","to":"auth","label":"2. Verify Credentials","type":"sync"},{"from":"auth","to":"db","label":"3. Query Account & Hash","type":"sync"},{"from":"db","to":"auth","label":"4. Return Account Record","type":"return"},{"from":"auth","to":"gateway","label":"5. Issue Signed JWT","type":"return"},{"from":"gateway","to":"client","label":"6. 200 OK (JWT Token)","type":"return"}]},"state-machine.json":{"type":"state-machine","title":"Document Lifecycle State Machine","description":"State transition diagram modeling document progression from draft creation through review, approval, revision, and publication.","width":840,"height":360,"nodes":[{"id":"init","label":"Start","role":"initial"},{"id":"draft","label":"Draft","series":1},{"id":"review","label":"Under Review","series":3},{"id":"rejected","label":"Changes Needed","series":5},{"id":"approved","label":"Approved","series":2},{"id":"published","label":"Published","role":"terminal","series":2}],"edges":[{"source":"init","target":"draft"},{"source":"draft","target":"review","label":"Submit"},{"source":"review","target":"approved","label":"Sign Off"},{"source":"review","target":"rejected","label":"Decline"},{"source":"rejected","target":"draft","label":"Revise"},{"source":"approved","target":"published","label":"Release"}]},"timeline.json":{"type":"timeline","title":"Platform Evolution Roadmap","description":"Chronological timeline detailing architecture checkpoints, platform milestones, and phase intervals.","width":860,"height":340,"phases":[{"id":"phase-foundation","label":"Phase 1: Foundation","start":0,"end":1,"series":1},{"id":"phase-migration","label":"Phase 2: Migration","start":1,"end":3,"series":2},{"id":"phase-rollout","label":"Phase 3: Rollout","start":3,"end":4,"series":3}],"milestones":[{"id":"m1","label":"Architecture RFC","date":"Q1 2026","series":1,"description":"Core architecture approved"},{"id":"m2","label":"Alpha Release","date":"Q2 2026","series":2,"description":"Developer preview ready"},{"id":"m3","label":"Beta Pilot","date":"Q3 2026","series":2,"description":"Pilot workloads active"},{"id":"m4","label":"Security Audit","date":"Q4 2026","series":3,"description":"Compliance validation passed"},{"id":"m5","label":"GA Launch","date":"Q1 2027","series":3,"description":"Production rollout complete"}]},"tree-horizontal.json":{"type":"tree-horizontal","title":"Platform Taxonomy Hierarchy","description":"Horizontal drill-down taxonomy tree mapping platform components from root domain to leaf subsystems.","width":860,"height":400,"root":{"id":"arch","label":"Platform Stack","children":[{"id":"fe","label":"Frontend","series":1,"children":[{"id":"fe-ds","label":"Design System"},{"id":"fe-console","label":"Console UI"},{"id":"fe-pwa","label":"Mobile PWA"}]},{"id":"services","label":"Services","series":2,"children":[{"id":"svc-cat","label":"Catalog API"},{"id":"svc-sync","label":"Sync Worker"},{"id":"svc-auth","label":"Auth Service"}]},{"id":"data","label":"Storage","series":3,"children":[{"id":"db-rel","label":"Relational DB"},{"id":"db-obj","label":"Object Store"}]}]}},"tree-vertical.json":{"type":"tree-vertical","title":"Organizational Governance Hierarchy","description":"Vertical tree chart displaying top-down organizational leadership and functional operational domains.","width":860,"height":420,"root":{"id":"exec","label":"Executive Board","children":[{"id":"eng","label":"Engineering","series":1,"children":[{"id":"eng-plat","label":"Core Platform"},{"id":"eng-infra","label":"Cloud Infra"}]},{"id":"prod","label":"Product & Design","series":2,"children":[{"id":"prod-ops","label":"Product Ops"},{"id":"prod-ds","label":"Design Systems"}]},{"id":"gov","label":"Governance","series":3,"children":[{"id":"gov-sec","label":"Data Security"},{"id":"gov-comp","label":"Compliance"}]}]}}};
+
+      function renderAll() {
+        vizFixtures.forEach(function (f) {
+          var mount = document.getElementById(f.el);
+          if (!mount) return;
+          if (vizFallback[f.file] && window.CDViz) CDViz.render(vizFallback[f.file], mount);
+        });
+
+        diagFixtures.forEach(function (f) {
+          var mount = document.getElementById(f.el);
+          if (!mount) return;
+          var diagLib = window.CDiag || window.CDDiag;
+          if (diagFallback[f.file] && diagLib) diagLib.render(diagFallback[f.file], mount);
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+      } else {
+        renderAll();
+      }
+    })();
+  </script>
+</body>
+</html>

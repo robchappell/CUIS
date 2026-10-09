@@ -1,0 +1,66 @@
+/* Core UI System theme: redhat. Primitives only. Not Tabler RH-1. */
+
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700;900&family=Red+Hat+Text:wght@400;500;600&display=swap");
+
+html[data-cuis-theme="redhat"] {
+  --cuis-font-display: "Red Hat Display", sans-serif;
+  --cuis-font-body: "Red Hat Text", sans-serif;
+  --cuis-page-title-weight: 700;
+  --cuis-display-tracking: -0.02em;
+  --cuis-text-primary: #151515;
+  --cuis-text-secondary: #4d4d4d;
+  --cuis-surface-canvas: #f2f2f2;
+  --cuis-surface-raised: #ffffff;
+  --cuis-surface-hover: #f0f0f0;
+  --cuis-action-primary-background: #ee0000;
+  --cuis-action-primary-text: #ffffff;
+  --cuis-border-subtle: #d2d2d2;
+  --cuis-border-hairline: #e0e0e0;
+  --cuis-focus-ring: #ee0000;
+  --cuis-series-1: #876fd4;
+  --cuis-series-2: #37a3a3;
+  --cuis-series-3: #0066cc;
+  --cuis-series-4: #63993d;
+  --cuis-series-5: #f5921b;
+  --cuis-status-info-text: #0066cc;
+  --cuis-status-ok-text: #3e8635;
+  --cuis-status-warn-text: #8a6100;
+  --cuis-status-critical-text: #c9190b;
+  --cuis-status-neutral-text: #151515;
+  --cuis-status-info-surface: #e7f1fa;
+  --cuis-status-ok-surface: #e9f5e8;
+  --cuis-status-warn-surface: #fbf3e0;
+  --cuis-status-critical-surface: #fde8e8;
+  --cuis-status-neutral-surface: #f0f0f0;
+}
+
+html[data-cuis-theme="redhat"][data-cuis-appearance="dark"] {
+  --cuis-text-primary: #f5f5f5;
+  --cuis-text-secondary: #c7c7c7;
+  --cuis-surface-canvas: #151515;
+  --cuis-surface-raised: #1f1f1f;
+  --cuis-surface-hover: #292929;
+  --cuis-action-primary-background: #ee0000;
+  --cuis-action-primary-text: #ffffff;
+  --cuis-border-subtle: #3c3c3c;
+  --cuis-border-hairline: #383838;
+  --cuis-focus-ring: #ff4d4d;
+  --cuis-text-accent: #ff4d4d;
+  --cuis-series-1: #876fd4;
+  --cuis-series-2: #37a3a3;
+  --cuis-series-3: #73bcf7;
+  --cuis-series-4: #7dba6d;
+  --cuis-series-5: #f6d173;
+  --cuis-status-info-text: #73bcf7;
+  --cuis-status-ok-text: #7dba6d;
+  --cuis-status-warn-text: #f6d173;
+  --cuis-status-critical-text: #ff8b84;
+  --cuis-status-neutral-text: #f5f5f5;
+  --cuis-status-info-surface: #1b2a38;
+  --cuis-status-ok-surface: #1c2e1a;
+  --cuis-status-warn-surface: #3a2e12;
+  --cuis-status-critical-surface: #3a1515;
+  --cuis-status-neutral-surface: #2c2c2c;
+  --cuis-elevation-card: 0 4px 22px -2px rgb(0 0 0 / 45%), 0 2px 8px -1px rgb(0 0 0 / 30%);
+  --cuis-elevation-hover: 0 14px 36px -4px rgb(0 0 0 / 55%), 0 5px 14px -2px rgb(0 0 0 / 35%);
+}

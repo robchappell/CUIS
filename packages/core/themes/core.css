@@ -1,0 +1,63 @@
+/* Core UI System theme: core. The default look. Primitives only. */
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200..900&display=swap");
+
+html[data-cuis-theme="core"] {
+  --cuis-font-display: "Source Sans 3", sans-serif;
+  --cuis-font-body: "Source Sans 3", sans-serif;
+  --cuis-text-primary: #1a1d23;
+  --cuis-text-secondary: #5c6570;
+  --cuis-surface-canvas: #f4f5f7;
+  --cuis-surface-raised: #ffffff;
+  --cuis-surface-hover: #e2e5ea;
+  --cuis-action-primary-background: #1b4f9c;
+  --cuis-action-primary-text: #ffffff;
+  --cuis-border-subtle: #e2e5ea;
+  --cuis-border-hairline: #e2e5ea;
+  --cuis-focus-ring: #1b4f9c;
+  --cuis-series-1: #3a74d0;
+  --cuis-series-2: #0e8a80;
+  --cuis-series-3: #b87512;
+  --cuis-series-4: #7a68c4;
+  --cuis-series-5: #c25a74;
+  --cuis-status-info-text: #1d4e89;
+  --cuis-status-ok-text: #0f6b4c;
+  --cuis-status-warn-text: #8a5a00;
+  --cuis-status-critical-text: #9f1239;
+  --cuis-status-neutral-text: #334155;
+  --cuis-status-info-surface: #e8eef6;
+  --cuis-status-ok-surface: #e7f6ef;
+  --cuis-status-warn-surface: #fbf3e0;
+  --cuis-status-critical-surface: #fde8ee;
+  --cuis-status-neutral-surface: #eef1f4;
+}
+
+html[data-cuis-theme="core"][data-cuis-appearance="dark"] {
+  --cuis-text-primary: #f2f4f7;
+  --cuis-text-secondary: #b6bec8;
+  --cuis-surface-canvas: #12141a;
+  --cuis-surface-raised: #1c1f27;
+  --cuis-surface-hover: #2e3440;
+  --cuis-action-primary-background: #a9c7ff;
+  --cuis-action-primary-text: #0f172a;
+  --cuis-border-subtle: #2e3440;
+  --cuis-border-hairline: #2e3440;
+  --cuis-focus-ring: #a9c7ff;
+  --cuis-series-1: #8fb4f2;
+  --cuis-series-2: #5dcfc4;
+  --cuis-series-3: #f0c36a;
+  --cuis-series-4: #c4b4f5;
+  --cuis-series-5: #f0a8bc;
+  --cuis-status-info-text: #93c5fd;
+  --cuis-status-ok-text: #6ee7b7;
+  --cuis-status-warn-text: #fcd34d;
+  --cuis-status-critical-text: #fda4af;
+  --cuis-status-neutral-text: #e2e8f0;
+  --cuis-status-info-surface: #243044;
+  --cuis-status-ok-surface: #143028;
+  --cuis-status-warn-surface: #3a2e12;
+  --cuis-status-critical-surface: #3a1822;
+  --cuis-status-neutral-surface: #2a303a;
+  --cuis-elevation-card: 0 4px 22px -2px rgb(0 0 0 / 45%), 0 2px 8px -1px rgb(0 0 0 / 30%);
+  --cuis-elevation-hover: 0 14px 36px -4px rgb(0 0 0 / 55%), 0 5px 14px -2px rgb(0 0 0 / 35%);
+}

@@ -1,0 +1,167 @@
+{
+  "id": "cuis",
+  "name": "Core UI System",
+  "version": "0.1.0",
+  "policyRef": "DESIGN.md",
+  "entryCss": "packages/core/cuis.css",
+  "entryJs": "packages/core/cuis.js",
+  "themeAttribute": "data-cuis-theme",
+  "themeValues": [
+    "core",
+    "mono",
+    "redhat"
+  ],
+  "appearanceAttribute": "data-cuis-appearance",
+  "appearanceValues": [
+    "light",
+    "dark"
+  ],
+  "densityAttribute": "data-cuis-density",
+  "densityValues": [
+    "compact",
+    "standard",
+    "comfortable"
+  ],
+  "meaning": "Self-contained design system. Themes hold color and font primitives. Components read semantic tokens, type roles, and space roles. Not Tabler and not RHDS.",
+  "principles": [
+    {
+      "id": "stack",
+      "title": "Stack",
+      "statement": "The stack owns vertical rhythm. Headings and paragraphs have no margin."
+    },
+    {
+      "id": "role",
+      "title": "Role",
+      "statement": "One role, one job. Type has six sizes. A page does not add a seventh."
+    },
+    {
+      "id": "density",
+      "title": "Density",
+      "statement": "Density changes space, not type."
+    },
+    {
+      "id": "native",
+      "title": "Native",
+      "statement": "Use the native element that matches the job. A table compares rows. A button commits. A link navigates."
+    },
+    {
+      "id": "intent",
+      "title": "Intent",
+      "statement": "An intent is not a color. Submit is not a fill. Status is not an action."
+    },
+    {
+      "id": "boundary",
+      "title": "Boundary",
+      "statement": "Components read semantic tokens from this framework. They do not read another framework's tokens."
+    }
+  ],
+  "themes": [
+    {
+      "id": "core",
+      "path": "packages/core/themes/core.css",
+      "label": "Core",
+      "selector": "data-cuis-theme=\"core\"",
+      "isDefault": true,
+      "fonts": [
+        "Source Sans 3"
+      ],
+      "primary": "#1b4f9c"
+    },
+    {
+      "id": "mono",
+      "path": "packages/core/themes/mono.css",
+      "label": "Mono",
+      "selector": "data-cuis-theme=\"mono\"",
+      "fonts": [
+        "Geist",
+        "Geist Mono"
+      ],
+      "primary": "#111111"
+    },
+    {
+      "id": "redhat",
+      "path": "packages/core/themes/redhat.css",
+      "label": "Red",
+      "selector": "data-cuis-theme=\"redhat\"",
+      "fonts": [
+        "Red Hat Display",
+        "Red Hat Text"
+      ],
+      "primary": "#ee0000"
+    }
+  ],
+  "tokens": [
+    {
+      "id": "tokens.css",
+      "path": "packages/core/tokens/tokens.css",
+      "kind": "css"
+    },
+    {
+      "id": "config.json",
+      "path": "packages/core/config.json",
+      "kind": "json"
+    }
+  ],
+  "controls": [
+    {
+      "id": "cuis-button",
+      "intent": "submit",
+      "purpose": "Commit the action named on the label.",
+      "whenNot": "Do not use for navigation. A link navigates."
+    },
+    {
+      "id": "cuis-button-quiet",
+      "intent": "cancel",
+      "purpose": "Decline or dismiss without committing.",
+      "whenNot": "Do not use as the only action on a form."
+    },
+    {
+      "id": "cuis-input",
+      "intent": "edit",
+      "purpose": "Collect a single line of text.",
+      "whenNot": "Do not use for a choice among known options. Use tabs or a select."
+    },
+    {
+      "id": "cuis-tabs",
+      "intent": "select",
+      "purpose": "Switch among peer views in the same section.",
+      "whenNot": "Do not use tabs to navigate to another page."
+    },
+    {
+      "id": "cuis-dialog",
+      "intent": "disclose",
+      "purpose": "Ask for a decision that blocks the page.",
+      "whenNot": "Do not use for content the reader can scroll past."
+    },
+    {
+      "id": "cuis-drawer",
+      "intent": "disclose",
+      "purpose": "Show supporting detail beside the page.",
+      "whenNot": "Do not use a drawer for a yes or no decision. Use a dialog."
+    },
+    {
+      "id": "cuis-card",
+      "intent": null,
+      "purpose": "Group a title and its content on a raised surface.",
+      "whenNot": "Do not nest cards."
+    },
+    {
+      "id": "cuis-table",
+      "intent": "compare",
+      "purpose": "Compare rows that share the same columns. Text is left. Numbers are right, in tabular figures.",
+      "whenNot": "Do not use a table for a single metric. Do not rebuild the rows as a grid of divs."
+    },
+    {
+      "id": "cuis-chip",
+      "intent": null,
+      "purpose": "Name a status. Color is the status role, not an action.",
+      "whenNot": "Do not use a chip as a button."
+    },
+    {
+      "id": "cuis-alert",
+      "intent": null,
+      "purpose": "State a condition in a bar across the page. Color is the status role, not an action.",
+      "whenNot": "Do not use an alert for a decision that blocks the page. Use a dialog."
+    }
+  ]
+}
