@@ -7,5 +7,8 @@ Font files are not in this repository. Themes request them from Google Fonts. Th
 - Source Sans 3. Adobe. SIL Open Font License 1.1.
 - Red Hat Display and Red Hat Text. Red Hat. SIL Open Font License 1.1. The reserved names stay on the `font-family` values.
 - Geist and Geist Mono. Vercel. SIL Open Font License 1.1.
+- IBM Plex Sans and IBM Plex Mono. IBM. SIL Open Font License 1.1. The reserved names stay on the `font-family` values.
 
 The `redhat` theme is inspired by Red Hat and uses the open-source Red Hat fonts. It is not a Red Hat product and it is not the Red Hat Design System. This repository does not include the Red Hat logo.
+
+The `blue` theme is inspired by IBM and uses the open-source IBM Plex fonts. It is not an IBM product. This repository does not include the IBM logo.

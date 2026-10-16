@@ -21,6 +21,11 @@ html[data-cuis-appearance="dark"] {
   --cdiag-series-3: var(--cuis-series-3);
   --cdiag-series-4: var(--cuis-series-4);
   --cdiag-series-5: var(--cuis-series-5);
+  --cdiag-series-1-surface: color-mix(in srgb, var(--cuis-series-1) 14%, var(--cuis-surface-raised));
+  --cdiag-series-2-surface: color-mix(in srgb, var(--cuis-series-2) 14%, var(--cuis-surface-raised));
+  --cdiag-series-3-surface: color-mix(in srgb, var(--cuis-series-3) 14%, var(--cuis-surface-raised));
+  --cdiag-series-4-surface: color-mix(in srgb, var(--cuis-series-4) 14%, var(--cuis-surface-raised));
+  --cdiag-series-5-surface: color-mix(in srgb, var(--cuis-series-5) 14%, var(--cuis-surface-raised));
   --cdiag-bg: var(--cuis-surface-raised);
   --cdiag-surface: var(--cuis-surface-canvas);
   --cdiag-surface-hover: var(--cuis-surface-hover);

@@ -24,12 +24,12 @@ html[data-cuis-theme="mono"] {
   --cuis-border-hairline: rgba(17, 17, 17, 0.08);
   --cuis-focus-ring: #111111;
 
-  /* Monochromatic series */
-  --cuis-series-1: #111111;
-  --cuis-series-2: #3f3f46;
-  --cuis-series-3: #71717a;
-  --cuis-series-4: #a1a1aa;
-  --cuis-series-5: #d4d4d8;
+  /* Strong architectural categorical series for charts and diagrams */
+  --cuis-series-1: #2563eb;
+  --cuis-series-2: #059669;
+  --cuis-series-3: #d97706;
+  --cuis-series-4: #7c3aed;
+  --cuis-series-5: #e11d48;
 
   /* Refined, quiet status roles */
   --cuis-status-info-text: #111111;
@@ -60,12 +60,12 @@ html[data-cuis-theme="mono"][data-cuis-appearance="dark"] {
   --cuis-border-hairline: rgba(255, 255, 255, 0.07);
   --cuis-focus-ring: #f5f5f0;
 
-  /* Monochromatic series (dark) */
-  --cuis-series-1: #f5f5f0;
-  --cuis-series-2: #d4d4d8;
-  --cuis-series-3: #a1a1aa;
-  --cuis-series-4: #71717a;
-  --cuis-series-5: #3f3f46;
+  /* Strong architectural categorical series (dark) */
+  --cuis-series-1: #60a5fa;
+  --cuis-series-2: #34d399;
+  --cuis-series-3: #fbbf24;
+  --cuis-series-4: #a78bfa;
+  --cuis-series-5: #fb7185;
 
   /* Status roles (dark) */
   --cuis-status-info-text: #f5f5f0;

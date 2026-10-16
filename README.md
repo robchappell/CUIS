@@ -11,6 +11,7 @@
 <p align="center">
   An open source, zero-dependency design system with chart and diagramming suite.
   <br>
+  <br>
   <a href="https://robchappell.github.io/CUIS"><strong>Explore the docs »</strong></a>
   <br>
   <br>
@@ -61,7 +62,7 @@
 </html>
 ```
 
-`data-cuis-theme` is `core`, `mono`, or `redhat`. `data-cuis-appearance` is `light` or `dark`. `data-cuis-density` is `compact`, `standard`, or `comfortable`.
+`data-cuis-theme` is `core`, `mono`, `redhat`, or `blue`. `data-cuis-appearance` is `light` or `dark`. `data-cuis-density` is `compact`, `standard`, or `comfortable`.
 
 Open `index.html` in this repository for the full specimen.
 
@@ -81,7 +82,7 @@ Set `data-theme` on `<html>` to the same value as `data-cuis-appearance`: `light
 
 ## Themes
 
-`core` is the default. `mono` is a grayscale theme that uses Geist. `redhat` is inspired by Red Hat and uses the open-source Red Hat fonts. That theme is not a Red Hat product.
+`core` is the default. `mono` is an architectural minimalist theme that uses Geist and strong categorical series colors for charts and diagrams. `redhat` is inspired by Red Hat and uses the open-source Red Hat fonts. `blue` is inspired by IBM, using the open-source IBM Plex fonts and a vibrant blue action color (`#0f62fe`). The Red and Blue themes are not official vendor products.
 
 Themes load fonts from Google Fonts. See [SECURITY.md](SECURITY.md) if a deployment cannot make that request.
 

@@ -1,0 +1,88 @@
+/* Core UI System theme: blue.
+   Inspired by IBM Design Language and Carbon.
+   Uses the open-source IBM Plex Sans and IBM Plex Mono fonts and a vibrant blue action color (#0f62fe).
+   This theme is not an IBM product. Primitives only. */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap");
+
+html[data-cuis-theme="blue"] {
+  --cuis-font-display: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --cuis-font-body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --cuis-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --cuis-page-title-weight: 600;
+  --cuis-section-title-weight: 600;
+  --cuis-card-title-weight: 600;
+  --cuis-display-tracking: -0.015em;
+
+  /* IBM Gray 10 / White surfaces */
+  --cuis-text-primary: #161616;
+  --cuis-text-secondary: #525252;
+  --cuis-surface-canvas: #f4f4f4;
+  --cuis-surface-raised: #ffffff;
+  --cuis-surface-hover: #e0e0e0;
+
+  /* IBM Blue 60 Action */
+  --cuis-action-primary-background: #0f62fe;
+  --cuis-action-primary-text: #ffffff;
+  --cuis-border-subtle: #e0e0e0;
+  --cuis-border-hairline: #c6c6c6;
+  --cuis-focus-ring: #0f62fe;
+  --cuis-text-accent: #0f62fe;
+
+  /* IBM Carbon Categorical Data Viz Palette (5-color sequence) */
+  --cuis-series-1: #6929c4; /* Purple 70 */
+  --cuis-series-2: #1192e8; /* Cyan 50 */
+  --cuis-series-3: #005d5d; /* Teal 70 */
+  --cuis-series-4: #9f1853; /* Magenta 70 */
+  --cuis-series-5: #fa4d56; /* Red 50 */
+
+  /* Carbon Status & Feedback Tokens */
+  --cuis-status-info-text: #0f62fe;
+  --cuis-status-ok-text: #198038;
+  --cuis-status-warn-text: #8a3800;
+  --cuis-status-critical-text: #da1e28;
+  --cuis-status-neutral-text: #161616;
+  --cuis-status-info-surface: #edf5ff;
+  --cuis-status-ok-surface: #defbe6;
+  --cuis-status-warn-surface: #fdf3e8;
+  --cuis-status-critical-surface: #fff1f1;
+  --cuis-status-neutral-surface: #e0e0e0;
+}
+
+html[data-cuis-theme="blue"][data-cuis-appearance="dark"] {
+  /* IBM Gray 100 / Gray 90 Dark Surfaces */
+  --cuis-text-primary: #f4f4f4;
+  --cuis-text-secondary: #c6c6c6;
+  --cuis-surface-canvas: #161616;
+  --cuis-surface-raised: #262626;
+  --cuis-surface-hover: #393939;
+
+  /* IBM Blue Action in Dark Mode */
+  --cuis-action-primary-background: #0f62fe;
+  --cuis-action-primary-text: #ffffff;
+  --cuis-border-subtle: #393939;
+  --cuis-border-hairline: #525252;
+  --cuis-focus-ring: #4589ff;
+  --cuis-text-accent: #78a9ff;
+
+  /* IBM Carbon Dark Categorical Data Viz Sequence */
+  --cuis-series-1: #8a3ffc; /* Purple 50 */
+  --cuis-series-2: #33b1ff; /* Cyan 40 */
+  --cuis-series-3: #009d9a; /* Teal 50 */
+  --cuis-series-4: #ee538b; /* Magenta 50 */
+  --cuis-series-5: #ff8389; /* Red 40 */
+
+  /* Carbon Dark Status & Feedback Tokens */
+  --cuis-status-info-text: #78a9ff;
+  --cuis-status-ok-text: #42be65;
+  --cuis-status-warn-text: #f1c21b;
+  --cuis-status-critical-text: #ff8389;
+  --cuis-status-neutral-text: #f4f4f4;
+  --cuis-status-info-surface: #002d9c;
+  --cuis-status-ok-surface: #044317;
+  --cuis-status-warn-surface: #483c00;
+  --cuis-status-critical-surface: #750e13;
+  --cuis-status-neutral-surface: #393939;
+  --cuis-elevation-card: 0 4px 22px -2px rgb(0 0 0 / 55%), 0 2px 8px -1px rgb(0 0 0 / 40%);
+  --cuis-elevation-hover: 0 14px 36px -4px rgb(0 0 0 / 65%), 0 5px 14px -2px rgb(0 0 0 / 45%);
+}

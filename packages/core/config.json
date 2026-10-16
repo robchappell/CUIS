@@ -1,7 +1,7 @@
 {
   "id": "cuis",
   "name": "Core UI System",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "policyRef": "DESIGN.md",
   "entryCss": "packages/core/cuis.css",
   "entryJs": "packages/core/cuis.js",
@@ -9,7 +9,8 @@
   "themeValues": [
     "core",
     "mono",
-    "redhat"
+    "redhat",
+    "blue"
   ],
   "appearanceAttribute": "data-cuis-appearance",
   "appearanceValues": [
@@ -88,6 +89,17 @@
         "Red Hat Text"
       ],
       "primary": "#ee0000"
+    },
+    {
+      "id": "blue",
+      "path": "packages/core/themes/blue.css",
+      "label": "Blue",
+      "selector": "data-cuis-theme=\"blue\"",
+      "fonts": [
+        "IBM Plex Sans",
+        "IBM Plex Mono"
+      ],
+      "primary": "#0f62fe"
     }
   ],
   "tokens": [

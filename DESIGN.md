@@ -4,7 +4,7 @@ CUIS has six type roles: page title, section title, card title, metric, body, an
 
 Density changes space, not type. `data-cuis-density` is `compact`, `standard`, or `comfortable`.
 
-Themes are `core`, `mono`, and `redhat`. `redhat` is inspired by Red Hat and uses the open-source Red Hat fonts. It is not a Red Hat product.
+Themes are `core`, `mono`, `redhat`, and `blue`. `redhat` is inspired by Red Hat and uses the open-source Red Hat fonts. It is not a Red Hat product. `blue` is inspired by IBM and uses the open-source IBM Plex fonts. It is not an IBM product.
 
 Components read `--cuis-*` tokens. Hex values belong in a theme file.
 
